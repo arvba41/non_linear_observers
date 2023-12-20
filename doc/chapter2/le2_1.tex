@@ -1,0 +1,154 @@
+\section{Le 2.1}
+
+Consider the following DAE:
+\begin{align*}
+    E\,\dot x &= A\,x + B\,u, & y &= C\,x
+\end{align*}
+There exists invertible matrices $P$ and $T$, where $x = T\,w$ and multiplying the model equations with $P$ from the left and $T,$ $T^{-1}$ to the right of $E$ gives 
+\begin{align*}
+    P\,E\,T\,T^{-1}\dot x &= P\,A\,T\,T^{-1}\,x + P\,B\,T\,T^{-1}\,u. \\
+    P\,E\,T\,\dot w &= P\,A\,T\,w + P\,B\,T\,T^{-1}\,u,
+\end{align*}
+where
+\begin{align*}
+    P\,E\,T = \begin{pmatrix}
+        I & 0 \\ 0 & E_2 
+    \end{pmatrix} \quad P\,A\,T = \begin{pmatrix}
+        A_1 & 0 \\ 0 & I
+    \end{pmatrix}, \quad \text{where $E_2$ is nilpotent.}
+\end{align*}
+% Note that $P\,E\,T \equiv E$, and $P\,A\,T \equiv A$.
+
+Assuming that the ODE part, $\dot w_1 = A_1\,w_1 + B_1\,u$ is observable, i.e., 
+\begin{align*}
+    \begin{pmatrix}
+        \lambda\,I - A_1 \\ C
+    \end{pmatrix} \quad \text{has full column rank } \forall \lambda, \text{ i.e., } \begin{pmatrix}
+        \lambda\,I - A_1 \\ 0 \\ C
+    \end{pmatrix} \text{ also has full column rank } \forall \lambda.
+\end{align*}
+
+Considering the following:
+\begin{align*}
+    \begin{pmatrix}
+        \lambda\,E - A \\ C
+    \end{pmatrix} &\equiv \begin{pmatrix}
+        \lambda\,P\,E\,T - P\,A\,T \\ C
+    \end{pmatrix} = \begin{pmatrix}
+        \lambda\,\begin{pmatrix}
+            I & 0 \\ 0 & E_2 
+        \end{pmatrix} - \begin{pmatrix}
+            A_1 & 0 \\ 0 & E_2 
+        \end{pmatrix} \\ \begin{pmatrix}
+            C_1 & C_2
+        \end{pmatrix}
+    \end{pmatrix}
+    = \begin{pmatrix}
+        \lambda\,I - A_1 & 0 \\ 0 & \lambda\,E_2 - I \\ C_1 & C_2
+    \end{pmatrix}
+\end{align*}
+Any square matrix has a Jordan normal form if the field of coefficients is extended to one containing all the eigenvalues of the matrix [\emph{from Wikipedia}].
+The Jordan form is given as 
+\begin{align*}
+    \begin{pmatrix}
+        \lambda_1 & 1 \\ & \lambda_1 & 1 \\ & & \lambda_1 \\ & & & \lambda_2 & 1 \\ & & & & \lambda_2 \\ & & & & & \lambda_3 \\ & & & & & & \ddots \\ & & & & & & & \lambda_n 
+    \end{pmatrix}, \text{for a nilpotent matrix}, \lambda_1 = \lambda_2 = \cdots = \lambda_n = 0
+\end{align*}
+Thus, $\lambda\,E_2 - I$ has always full-column rank. 
+
+\fbox{
+    \parbox{0.95\textwidth}{
+        Therefore, if $\begin{pmatrix}
+            \lambda\,I - A_1 & C
+        \end{pmatrix}^T$ has full-column rank then $\begin{pmatrix}
+            \lambda\,E - A & C
+        \end{pmatrix}^T$ has full-column rank $\forall\ \lambda$. \\
+        
+        If $\begin{pmatrix}
+            \lambda\,E - A & C
+        \end{pmatrix}^T$ has full-column rank then its minor $\begin{pmatrix}
+            \lambda\,I - A_1 & C
+        \end{pmatrix}^T$ also has full-column rank $\forall\ \lambda$.
+    }
+}
+
+
+% The DAE can be partitioned as
+% \begin{align*}
+%     E_1\,\dot x_1 &= A_1\,x_1 + B_1\,u, & E_2\,\dot x_2 &= A_2\,x_2 + B_2\,u, & y &= \begin{pmatrix}
+%         C_1 & C_2
+%     \end{pmatrix}\,x
+% \end{align*}
+% with $E_2\,\dot x_2 = A_2\,x_2 + B_2\,u,$ beging the ODE, i.e., usually $E_2 = I$.
+% \begin{align*}
+%     \begin{pmatrix}
+%         E_1 & 0 \\ 0 & E_2
+%     \end{pmatrix}\,\dot x &= \begin{pmatrix}
+%         A_1 & 0 \\ 0 & A_2
+%     \end{pmatrix}\,x + \begin{pmatrix}
+%         B_1 \\ B_2
+%     \end{pmatrix}\,u & y &= \begin{pmatrix}
+%         C_1 & C_2
+%     \end{pmatrix}\,x
+% \end{align*}
+
+% Assume that the ODE part of the system is observable, i.e.,
+% \begin{align*}
+%     \text{rank}\begin{pmatrix}
+%         \lambda E_1 - A_1 \\ C_1
+%     \end{pmatrix} = n
+% \end{align*}
+
+% The observability matrix for the entire system can be written as
+% \begin{align*}
+%     \mathcal{O}x &= \begin{pmatrix}
+%         \lambda \begin{pmatrix}
+%             E_1 & 0 \\ 0 & E_2
+%         \end{pmatrix} - \begin{pmatrix}
+%             A_1 & 0 \\ 0 & A_2
+%         \end{pmatrix} \\ \begin{pmatrix}
+%             C_1 & C_2
+%         \end{pmatrix}
+%     \end{pmatrix}
+%     = \begin{pmatrix}
+%         \lambda E_1 - A_1 & 0 \\ 0 & \lambda E_2 - A_2 \\ C_1 & C_2
+%     \end{pmatrix}
+% \end{align*}
+% \begin{theorem}
+%     If $A$ is an $n \times m$ matrix, then the determinant of a $p \times p$ submatrix obtained from $A$ is called a minor of order $p$.
+% \end{theorem}
+
+% The submatrix is $\begin{pmatrix}
+%     \lambda E_1 - A_1
+% \end{pmatrix}$ and has the order $p$, with $p$ number of 'states'. Since this is an ODE, this matrix is non-zero
+
+% The submatrix is $\begin{pmatrix}
+%     \lambda E_2 - A_2
+% \end{pmatrix}$ and has the order $q$, with $q$ number of 'states'. Since this is part of a DAE this has the set of algebraic expressions which is also not a non-zero matrix.
+
+% For a SISO system, $C_1$ and $C_2$ is not a square matrix.
+
+% % The largest minor is $\begin{pmatrix}
+% %     \lambda E_2 - A_2 \\ C_2
+% % \end{pmatrix}$.
+
+% % $\det\begin{pmatrix}
+% %     \lambda E_2 - A_2
+% % \end{pmatrix}$ is non-zero since the ODE is observable.
+
+% \begin{theorem}
+%     The rank of an $n \times m$ matrix is equal to the order of its largest non-zero minor.
+% \end{theorem}
+
+% % The rank of $\det\begin{pmatrix}
+% %     \lambda E_2 - A_2 \\ C_2
+% % \end{pmatrix}$ is the equal to the order of $\det\begin{pmatrix}
+% %     \lambda E_2 - A_2
+% % \end{pmatrix}$, which is equal to the number of states $n$.
+
+% \begin{theorem}
+%     A tall $n \times m$ matrix is full column is \underline{if and only if} there exists a non-zero minor of order $p$.
+% \end{theorem}
+
+% % Therefore,...
+% 1

@@ -1,0 +1,37 @@
+\section{Le 1.2}
+\begin{align*}
+    \dot \theta_1 &= 0 \quad \dot \theta_2 = 0 & z(t) &= \begin{pmatrix}
+        1-y(t) & y(t)
+    \end{pmatrix}\,\theta \\
+    A &= \begin{pmatrix}
+        0 & 0 \\
+        0 & 0
+    \end{pmatrix} & C &= \begin{pmatrix}
+        1-y(t) & y(t)
+    \end{pmatrix}
+\end{align*}
+The observability criterion is 
+\begin{align*}
+    \Sigma_0 &= \int_{0}^{\infty} e^{A^Tt}\,C^T\,C\,e^{At} dt \\
+    \Sigma_0 &= \int_{0}^{\infty} e^{\begin{pmatrix} 0 & 0 \\ 0 & 0\end{pmatrix}t}\, \begin{pmatrix} 1-y(t) \\ y(t) \end{pmatrix}\,\begin{pmatrix} 1-y(t) & y(t) \end{pmatrix}\,e^{\begin{pmatrix} 0 & 0 \\ 0 & 0\end{pmatrix}t} dt \\
+    \Sigma_0 &= \int_{0}^{\infty} I\, \begin{pmatrix} 1-y(t) \\ y(t) \end{pmatrix}\,\begin{pmatrix} 1-y(t) & y(t) \end{pmatrix}\,I dt \\
+    \Sigma_0 &= \int_{0}^{\infty} \begin{pmatrix} \left(1-y(t)\right)^2 & y(t)\,\left(1-y(t)\right)\\ y(t)\,\left(1-y(t)\right) & y^2(t) \end{pmatrix}\,dt \\
+    \Sigma_0 &= \begin{pmatrix} \int_{0}^{\infty} \left(1+y^2(t)-2y(t)\right)\,dt & \int_{0}^{\infty} \left(y(t)-y^2(t)\right)\,dt\\ \int_{0}^{\infty} \left(y(t)-y^2(t)\right)\,dt & \int_{0}^{\infty} y^2(t)\,dt \end{pmatrix}
+\end{align*}
+Let, 
+\begin{align*}
+    Y_1 &= \int_{0}^{\infty} y(t) dt & \&,\ Y_2 &= \int_{0}^{\infty} y^2(t) dt
+\end{align*}
+Therefore, 
+\begin{align*}
+    \Sigma_0 &= \begin{pmatrix} t + Y_2 - 2Y_1 & Y_1 - Y_2\\ Y_1 - Y_2 & Y_2 \end{pmatrix}.
+\end{align*}
+For the system to be observable det$\left(\Sigma_0\right) \neq 0$, i.e., 
+\begin{align*}
+    \text{det}\left(\Sigma_0\right) \neq 0 \implies Y_2t + Y_2^2 - 2Y_1Y_2 + \left(Y_1 - Y_2\right)^2 &\neq 0 \\
+    Y_2t + \bcancel{Y_2^2} - \cancel{2Y_1Y_2} - Y_1^2 - \bcancel{Y_2^2} + \cancel{2Y_1Y_2} &\neq 0 \\
+    Y_2t - Y_1^2 &\neq 0 \\
+    t\,\int_{0}^{\infty} y^2(t) dt - \left(\int_{0}^{\infty} y(t) dt\right)^2 &\neq 0 
+\end{align*}
+If $y(t)$ is a constant then det$\left(\Sigma_0\right) = 0$.
+

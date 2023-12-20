@@ -1,0 +1,58 @@
+\section{Kilath 2.3.3}
+Realizing linear system to state-space
+\begin{align*}
+    y &= e\,\frac{s+1}{s\left(s+3\right)} \\ y &= \left(u - y\frac{k}{s+a}\right)\,\frac{s+1}{s\left(s+3\right)} \\ 
+    y &= u\,\frac{s+1}{s\left(s+3\right)} - y\,\frac{k\,\left(s+1\right)}{s\left(s+3\right)\left(s+a\right)}\\
+    y + y\,\frac{k\,\left(s+1\right)}{s\left(s+3\right)\left(s+a\right)} &= u\,\frac{s+1}{s\left(s+3\right)} \\
+    \frac{y\,s\left(s+3\right)\left(s+a\right) + y\,k\,\left(s+1\right)}{s\left(s+3\right)\left(s+a\right)} &= u\,\frac{s+1}{s\left(s+3\right)}\\
+    \frac{y\,s\left(s+3\right)\left(s+a\right) + y\,k\,\left(s+1\right)}{\left(s+a\right)} &= u\,\left(s+1\right) \\
+    y\,s\left(s+3\right)\left(s+a\right) + y\,k\,\left(s+1\right) &= u\,\left(s+1\right)\,\left(s+a\right)\\
+    y\,s\left(s^2+s\left(3+a\right)+3a\right) + y\,k\,\left(s+1\right) &= u\,\left(s^2+s\left(1+a\right)+a\right) \\
+    y\left(s^3+s^2\left(3+a\right)+3a\,s\right) + y\,k\,s + y\,k &= u\,\left(s^2+s\left(1+a\right)+a\right) \\
+    y\left(s^3+s^2\left(3+a\right)+\left(3a + k\right)\,s + k\right) &= u\,\left(s^2+s\left(1+a\right)+a\right) \\
+    \frac{y}{u} &= \frac{s^2+s\left(1+a\right)+a}{s^3+s^2\left(3+a\right)+\left(3a + k\right)\,s + k}\\
+    \frac{y}{u} &= \frac{0\,s^3 + s^2+s\left(1+a\right)+a}{s^3+s^2\left(3+a\right)+\left(3a + k\right)\,s + k}\\
+\end{align*}
+Controllable canonical state space model
+\begin{align*}
+    A &= \begin{pmatrix}
+        0  & 1                    & 0\\
+        0  & 0                    & 1\\     
+        -k & -\left(3a + k\right) & -\left(3 + a\right)
+    \end{pmatrix},
+    & B &= \begin{pmatrix}
+        0 \\
+        0 \\
+        1
+    \end{pmatrix},
+    & C &= \begin{pmatrix}
+        a & \left(1+a\right) & 1
+    \end{pmatrix}
+\end{align*}
+Observable canonical state space model (\emph{check something is wrong})
+\begin{align*}
+    A &= \begin{pmatrix}
+        -\left(3 + a\right) & 1 & 0\\
+        -\left(3a + k\right)& 0 & 1\\     
+        -k                  & 0 & 0 
+    \end{pmatrix},
+    & B &= \begin{pmatrix}
+        1 \\
+        \left(1 + a\right) \\
+        a
+    \end{pmatrix},
+    & C &= \begin{pmatrix}
+        1 & 0 & 0
+    \end{pmatrix}
+\end{align*}
+Controllability and observability
+\begin{align*}
+    \mathcal{O}x &= \begin{pmatrix}
+        C \\ CA \\ CA^2
+    \end{pmatrix} = \begin{pmatrix}
+        1                   & 0 & 0 \\
+        -\left(3 + a\right) & 1 & 0 \\
+        (a + 3)^2 -k -3a    & -\left(a +3\right) & 1
+    \end{pmatrix}
+\end{align*}
+Observability on $k$.

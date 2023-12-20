@@ -1,0 +1,132 @@
+\section{Le 2.8}
+
+\subsection*{Practice}
+
+The system:
+\begin{align*}
+    \dot X &= \begin{pmatrix}
+        \left(\frac{x_2}{x_1}\right)^2 \\ \left(\frac{x_2}{x_1}\right)^3 - x_2
+    \end{pmatrix} + \begin{pmatrix}
+        x_1\\x_2
+    \end{pmatrix}\,u & y = x_1\,x_2
+\end{align*}
+let, $z = \Phi(x) = \begin{pmatrix}
+    x_1 \\ \frac{x_2}{x_1}
+\end{pmatrix}$, then 
+\begin{align*}
+    \dot z &= \frac{\partial\Phi\left(x\right)}{\partial x}\, f\left(x,u\right)\Bigg|_{x = \Phi^{-1}(z)} = \begin{pmatrix} 1 & 0 \\ -\frac{x_2}{x_1^2} & \frac{1}{x_1}\end{pmatrix} f\left(x,u\right)\Bigg|_{x = \Phi^{-1}(z)} \\
+    % &= \begin{pmatrix}
+    %     \left(\frac{x_2}{x_1}\right)^2 \\ -\frac{x_2^3}{x_1^4} - \frac{x_2 - \frac{x_2^3}{x_1^3}}{x_1}
+    % \end{pmatrix} + \begin{pmatrix}
+    %     x_1 \\ 0
+    % \end{pmatrix}\,u\Bigg|_{x = \Phi^{-1}(z)} 
+    % = \begin{pmatrix}
+    %     \left(\frac{x_2}{x_1}\right)^2 \\ \frac{- x_2^3 - x_1\,x_2 + \frac{x_2^3}{x_1^2}}{x_1^4}
+    % \end{pmatrix} + \begin{pmatrix}
+    %     x_1 \\ 0
+    % \end{pmatrix}\,u\Bigg|_{x = \Phi^{-1}(z)}  \\
+    &= \begin{pmatrix}
+        \left(\frac{x_2}{x_1}\right)^2 \\ -\frac{x_2}{x_1}
+    \end{pmatrix} + \begin{pmatrix}
+        x_1 \\ 0
+    \end{pmatrix}\,u\Bigg|_{x = \Phi^{-1}(z)} 
+\end{align*}
+it is also defined that 
+\begin{align*}
+    \Phi^{-1}(x) = \begin{pmatrix}
+        z_1 \\ z_2\,z_1
+    \end{pmatrix}
+\end{align*}
+Therefore, 
+\begin{align*}
+    \dot z &= \begin{pmatrix}
+        z_2^2 \\ -z_2
+    \end{pmatrix} + \begin{pmatrix}
+        z_1 \\ 0
+    \end{pmatrix}\,u \quad y = z_1^2\,z_2, \\
+    \dot z_1 &= z_2^2 + z_1\,u \quad \dot z_2 = -z_2 \quad y = z_1^2\,z_2, \implies \dot z_1 = \frac{1}{z_1^4} z_2^2\,z_1^4 + z_1\,u \quad \dot z_2 = -z_2 \quad y = z_1^2\,z_2,
+\end{align*}
+
+
+\subsection*{Excercise}
+
+The system: 
+\begin{align*}
+    \dot X &= \begin{pmatrix}
+        x_1^2\,x_2^2 + u \\ 1 - x_1\,x_2^3 - x_2 - \frac{x_2}{x_1}\,u 
+    \end{pmatrix}\quad y = x_1\,x_2 
+\end{align*}
+let, 
+\begin{align*}
+    z &= \Phi(x) = \begin{pmatrix}
+        x_2x_1 \\ x_1
+    \end{pmatrix}, & \implies x &= \Phi^{-1}(x) = \begin{pmatrix}
+        z_2 \\ \frac{z_1}{z_2}
+    \end{pmatrix}, 
+\end{align*}
+Then 
+\begin{align*}
+    \dot z &= \frac{\partial\Phi\left(x\right)}{\partial x}\, f\left(x,u\right)\Bigg|_{x = \Phi^{-1}(z)} = \begin{pmatrix} x_2 & x_1 \\ 1 & 0\end{pmatrix} \begin{pmatrix}
+        x_1^2\,x_2^2 + u \\ 1 - x_1\,x_2^3 - x_2 - \frac{x_2}{x_1}\,u 
+    \end{pmatrix}\Bigg|_{x = \Phi^{-1}(z)} \\
+    &= \begin{pmatrix}
+        x_1\,\left(1 - x_2\right) \\ x_1^2\,x_2^2 + u
+    \end{pmatrix}\Bigg|_{x = \Phi^{-1}(z)} = \begin{pmatrix}
+        -z_1 + z_2 \\ z_1^2 + u
+    \end{pmatrix}
+    % &= \begin{pmatrix}
+\end{align*}   
+Now, 
+\begin{align*}
+    y = h(x)\big|_{x = \Phi^{-1}(z)} = x_1\,x_2\big|_{x = \Phi^{-1}(z)} = z_1.
+\end{align*}
+Therefore, 
+\begin{align*}
+    \begin{pmatrix}
+        \dot z_1 \\ \dot z_2
+    \end{pmatrix} &= \begin{pmatrix}
+        -1 & 1 \\ 0 & 0
+    \end{pmatrix}\,\begin{pmatrix}
+        z_1 \\ z_2
+    \end{pmatrix} + \begin{pmatrix}
+        0 \\ 1
+    \end{pmatrix}\,u + \begin{pmatrix}
+        0 \\ y^2
+    \end{pmatrix} \quad y = \begin{pmatrix}
+        1 & 0
+    \end{pmatrix}\,\begin{pmatrix}
+        z_1 \\ z_2
+    \end{pmatrix}
+\end{align*}
+For a linear system, the observability is 
+\begin{align*}
+    \mathcal{O}z = \begin{pmatrix}
+        C \\ C\,A
+    \end{pmatrix} = \begin{pmatrix}
+        1 & 0 \\ -1 & 1
+    \end{pmatrix} \text{has full-column rank}
+\end{align*}
+If $Z$ is observable then $X$ is also observable since $X = \Phi^{-1}(Z)$, i.e., an algebraic expression.
+
+The observer can be designed as 
+\begin{align*}
+\dot{\hat Z} = A\,\hat Z + f(u,y) + K\,\left(y - C\,\hat Z \right)
+\end{align*}
+
+The closed-loop observer poles 
+\begin{align*}
+    \alpha_\mathcal{O}(s) &= \text{det}\left(SI - A + K\,C\right) \\
+    &=  \det\left(\begin{pmatrix}
+        s & 0 \\ 0 & s 
+        \end{pmatrix} - \begin{pmatrix}
+        -1 & 1 \\ 0 & 0
+    \end{pmatrix} + \begin{pmatrix}
+        k_1 \\ k_2
+    \end{pmatrix}\,\begin{pmatrix}
+        1 & 0
+    \end{pmatrix}\right)\\
+    &= \det\begin{pmatrix}
+        k_1 + s + 1 & -1 \\ k_2 & s
+    \end{pmatrix} \\
+    &= s^2 + s\,\left(k_1 + 1\right) + k_2
+\end{align*}

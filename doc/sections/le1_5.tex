@@ -1,0 +1,42 @@
+\section{Le 1.5}
+Considering partitioned state equations 
+\begin{align*}
+    \begin{pmatrix}
+        \dot x_r \\ \dot x_n 
+    \end{pmatrix} &= \begin{pmatrix}
+        A_r & a_r \\ a_n & a_{nn} 
+    \end{pmatrix}\,\begin{pmatrix}
+        x_r \\ x_n 
+    \end{pmatrix} + \begin{pmatrix}
+        b_r \\ b_u 
+    \end{pmatrix}\,u(t) & y &= x_n
+\end{align*} 
+This gives, 
+\begin{align*}
+    \dot x_r &= A_r\,x_r + a_r\,x_n + b_r\,u(t) & \dot x_n &= a_n\,x_r + a_{nn}\,x_n + b_n\,u(t)
+\end{align*}
+Considering 
+\begin{align*}
+    y_r &= \dot y - a_{nn}\,y - b_n\,u(t).
+\end{align*}
+Then, 
+\begin{align*}
+    \dot x_r &= A_r\,x_r + a_r\,x_n + b_r\,u(t) & y_r &= a_n\,x_r
+\end{align*}
+The observer is 
+\begin{align*}
+    \hat x_r &= A_r\,\hat x_r + a_r\,\hat x_n + b_r\,u(t) + K\,\left(y_r - a_n\,\hat x_r\right)
+\end{align*}
+Substituting $x_n = \hat x_n = y$,
+\begin{align*}
+    \dot x_r &= A_r\,x_r + a_r\,y + b_r\,u(t) \\
+    \dot{\hat x}_r &= A_r\,\hat x_r + a_r\,y + b_r\,u(t) + K\,\left(a_n\,x_r - a_n\,\hat x_r\right)
+\end{align*}
+The error signal,
+\begin{align*}
+    \dot{\tilde x}_r &= \dot x_r - \dot{\hat x}_r \\
+    &= A_r\,x_r + \cancel{a_r\,y} + \bcancel{b_r\,u(t)} - A_r\,\hat x_r - \cancel{a_r\,y} - \bcancel{b_r\,u(t)} - K\,\left(a_n\,\hat x_r - a_n\,\hat x_r\right) \\
+    &= A_r\,x_r - A_r\,\hat x_r - K\,\left(a_n\,x_r - a_n\,\hat x_r\right) \\
+    & = \left(A_r - K\,a_n\right)\,\tilde{x}_r
+\end{align*}
+The poles can be selected arbitrarily in the error dynamics of the reduced observer.

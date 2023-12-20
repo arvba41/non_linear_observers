@@ -1,0 +1,45 @@
+\section{Kilath 2.3-16 a-b}
+\begin{align*}
+    A &= \begin{pmatrix} 
+        \lambda & 1 & 0 \\
+        0 & \lambda & 1 \\
+        0 & 0 & \lambda
+        \end{pmatrix} & C &= \begin{pmatrix}
+            \gamma_1 & \gamma_2 & \gamma_3
+        \end{pmatrix}.
+\end{align*}
+The observability matrix is 
+\begin{align*}
+    \mathcal{O} &= \begin{pmatrix}
+        C\\
+        C\,A\\
+        C\,A^2
+    \end{pmatrix} = \begin{pmatrix}
+        \gamma_1 & \gamma_2 & \gamma_3 \\
+        \lambda\,\gamma_1 & \gamma_1 + \lambda\,\gamma_2 & \gamma_2 + \lambda\,\gamma_3 \\
+        \lambda^2\,\gamma_1 & 2\gamma_1\,\lambda + \lambda^2\,\gamma_2 & 2\gamma_2\,\lambda + \lambda^2\,\gamma_3
+    \end{pmatrix}
+\end{align*}
+The rank$\left(\mathcal{O}\right) = n$ when $\gamma_1 \neq 0$. 
+\begin{align*}
+    A &= \begin{pmatrix} 
+        \lambda & 1 & 0 \\
+        0 & \lambda & 0 \\
+        0 & 0 & \mu
+        \end{pmatrix} & C &= \begin{pmatrix}
+            \gamma_1 & \gamma_2 & \gamma_3
+        \end{pmatrix}.
+\end{align*}
+The observability matrix is 
+\begin{align*}
+    \mathcal{O} &= \begin{pmatrix}
+        C\\
+        C\,A\\
+        C\,A^2
+    \end{pmatrix} = \begin{pmatrix}
+        \gamma_1 & \gamma_2 & \gamma_3 \\
+        \lambda\,\gamma_1 & \gamma_1 + \lambda\,\gamma_2 & \mu\,\gamma_3 \\
+        \lambda^2\,\gamma_1 & 2\gamma_1\,\lambda + \lambda^2\,\gamma_2 & \mu^2\,\gamma_3
+    \end{pmatrix}
+\end{align*}
+The rank$\left(\mathcal{O}\right) = n$ when $\gamma_1 \neq 0$ and $\mu \neq 0$. 

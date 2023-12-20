@@ -1,0 +1,40 @@
+\section{Le 1.3}
+Show that the observability gramian $\Sigma_o$ satisfies the Lyapunov equation
+\begin{align*}
+    A^T\,\Sigma_o + \Sigma_o\,A + C^T\,C = 0,
+\end{align*}
+or, 
+\begin{align*}
+    A^T\,\Sigma_o + \Sigma_o\,A = - C^T\,C.
+\end{align*}
+Multiply $e^{At}$ to the right and $e^{A^Tt}$ to the left,
+\begin{align*}
+    e^{A^Tt}\,A^T\,\Sigma_o\,e^{At} + e^{A^Tt}\,\Sigma_o\,A\,e^{At} = -e^{A^Tt}\,C^T\,C\,e^{At}.
+\end{align*}
+Since, 
+\begin{align*}
+    \frac{d}{dt}e^{At} = A\,e^{At}
+\end{align*}
+as $e^{At}$ and $A$ are commutative, 
+\begin{align*}
+    \left(\frac{d}{dt}e^{A^Tt}\right)\,\Sigma_o\,e^{At} + e^{A^Tt}\,\Sigma_o\,\left(\frac{d}{dt}e^{At}\right) = -e^{A^Tt}\,C^T\,C\,e^{At}.
+\end{align*}
+Using the product rule, 
+\begin{align*}
+    \frac{d}{dt}\left(e^{A^Tt}\,\Sigma_o\,e^{At}\right) = -e^{A^Tt}\,C^T\,C\,e^{At}.
+\end{align*}
+integrating both sides with limits from 0 to $\infty$
+\begin{align*}
+    \int_0^\infty\frac{d}{dt}\left(e^{A^Tt}\,\Sigma_o\,e^{At}\right) dt &= \int_0^\infty-e^{A^Tt}\,C^T\,C\,e^{At} dt.\\
+    \implies \left[e^{A^Tt}\,\Sigma_o\,e^{At}\right]_0^\infty &= \int_0^\infty-e^{A^Tt}\,C^T\,C\,e^{At} dt.
+\end{align*}
+for a linear system with the state equation $\dot X = A\,X$ solves to $X = e^{At}$ and 
+\begin{align*}
+    \lim_{t\to\infty}X = \lim_{t\to\infty}e^{At} = 0
+\end{align*}
+if the eigenvalues are on the left-hand side of the complex plane.
+Using the stability requirement
+\begin{align*}
+    \left[e^{A^Tt}\,\Sigma_o\,e^{At}\right]_0^\infty &= \int_0^\infty-e^{A^Tt}\,C^T\,C\,e^{At} dt.\\
+    \text{becomes, } \Sigma_o &= \int_0^\infty e^{A^Tt}\,C^T\,C\,e^{At} dt.
+\end{align*}

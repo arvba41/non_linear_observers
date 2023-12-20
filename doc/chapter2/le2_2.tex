@@ -1,0 +1,193 @@
+\section{Le 2.2}
+(a) Writing the model equations in the form 
+\begin{align*}
+    E\,\dot x &= A\,x + B\,u
+\end{align*}
+
+The model equations are
+\begin{align*}
+    u - v_1 &= R_1\,i_1 & 
+    v_3 - v_4 &= R_2\,i_2 & 
+    v_1 - v_4 &= R_3\,i_3 & 
+    C\,\dot v_1 -C\,\dot v_3 &= i_2 \\
+    v_1 - v_2 &= 0 & 
+    v_2 &= 0 & 
+    i_1 &= i_2 + i_3 \\
+    v_1 + R_1\,i_1 &= u & 
+    v_3 - v_4 - R_2\,i_2 &= 0 & 
+    v_1 - v_4 - R_3\,i_3 &=  0& 
+    C\,\dot v_1 -C\,\dot v_3 - i_2 &= 0\\
+    v_1 - v_2 &= 0 & 
+    v_2 &= 0 & 
+    i_1 - i_2 - i_3 &= 0
+\end{align*}
+
+Considering $x = \begin{pmatrix} i_1 & i_2 & i_3 & v_1 & v_2 & v_3 & v_4 \end{pmatrix}^T$,
+\begin{align*}
+    \begin{pmatrix}
+        %   i1  & i2    & i3    & v1    & v2    & v3    & v4     
+            0   & 0     & 0     & 0     & 0     & 0     & 0 \\
+            0   & 0     & 0     & 0     & 0     & 0     & 0 \\
+            0   & 0     & 0     & 0     & 0     & 0     & 0  \\
+            0   & 0     & 0     & C_c   & 0     & -C_c  & 0 \\
+            0   & 0     & 0     & 0     & 0     & 0     & 0  \\
+            0   & 0     & 0     & 0     & 0     & 0     & 0  \\
+            0   & 0     & 0     & 0     & 0     & 0     & 0 
+        \end{pmatrix}\,\begin{pmatrix} 
+            \dot i_1 \\ \dot i_2 \\ \dot i_3 \\ \dot v_1 \\ \dot v_2 \\ \dot v_3 \\ \dot v_4
+        \end{pmatrix} &= \begin{pmatrix}
+    %   i1    & i2  & i3    & v1    & v2    & v3    & v4    
+        -R_1& 0     & 0     & -1    & 0     & 0     & 0 \\
+        0   & -R_2  & 0     & 0     & 0     & 1     & -1 \\
+        0   & 0     & -R_3  & 1     & 0     & 0     & -1 \\
+        0   & 1     & 0     & 0     & 0     & 0     & 0 \\
+        0   & 0     & 0     & 1     & -1    & 0     & 0\\
+        0   & 0     & 0     & 0     & 1     & 0     & 0\\
+        1   & -1    & -1    & 0     & 0     & 0     & 0
+    \end{pmatrix}\,\begin{pmatrix} 
+        i_1 \\ i_2 \\ i_3 \\ v_1 \\ v_2 \\ v_3 \\ v_4 
+    \end{pmatrix} \\ 
+    & \qquad + \begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \end{pmatrix}\,u
+\end{align*}
+
+(b) Measurement signals: 
+
+Choosing $C$ such that $\begin{pmatrix}
+    \lambda\,E - A & C
+\end{pmatrix}^T$ has full-rank $\forall\ \lambda$. 
+
+$\lambda\,E - A$ is 0, when $\det\left(\lambda\,E - A\right) = 0$, i.e., $\lambda = \frac{-1}{C_c\,\left(R_2 + R_3\right)}$ 
+
+The matrix $\begin{pmatrix}
+    \lambda\,E - A & C
+\end{pmatrix}^T$ \underline{does not} have full-rank with the measurement signals $\begin{Bmatrix}
+    i_1, v_1, v_2
+\end{Bmatrix}\ \forall\ \lambda$.
+
+% \underline{Alternative:}
+% The algebraic expressions can be determined using the input so considering the ODE
+% \begin{align*}
+%     C_c\,\dot v_1 -C_c\,\dot v_3 - i_2 &= 0 & \&\ v_1 - v_2 &= 0, \quad
+%     v_2 = 0 \\
+%     & & \implies \dot v_1 - \dot v_2 &= 0, \quad
+%     \dot v_2 = 0 \\
+%     & & \implies \dot v_1 &= 0,
+% \end{align*}
+% Therefore, $C_c\,\dot v_1 -C_c\,\dot v_3 - i_2 = 0$ reduces to $ C_c\,\dot v_3 = i_2 $
+
+% To estimate the state $v_3$, $i_2$ is needed and $i_2$ can be determined by the following:
+% \begin{align*}
+%     i_2 &= i_1 - i_3, & i_2 &= \frac{u - v_1}{R_1} - i_3, & i_2 &= \frac{u - v_1}{R_1} - \frac{v_1 - v_4}{R_3}\\
+%     i_2 &= \frac{v_3 - v_4}{R_2}, & \implies  R_2\,C_c\,\dot v_3 &= v_3 - v_4
+% \end{align*}
+% % The following are the possible measurement equations
+% % \begin{align*}
+% %     y &= \begin{cases}
+% %         v_3 \\
+% %         i_2 \\
+% %         i_3 \\
+% %         v_4 \\
+% %         \begin{pmatrix}
+% %             1 & -1
+% %         \end{pmatrix}\,\begin{pmatrix}
+% %             i_1 & i_3 
+% %         \end{pmatrix} \\
+% %         \begin{pmatrix}
+% %             1 & 0 \\ 0 & 1
+% %         \end{pmatrix}\,\begin{pmatrix}
+% %             i_1 & i_3 
+% %         \end{pmatrix} 
+% %     \end{cases} & \text{The single measurements that does not work}\ \begin{Bmatrix}
+% %         i_1, v_1, v_2
+% %     \end{Bmatrix}
+% % \end{align*}
+
+% The single measurements that do not work $\begin{Bmatrix}
+%         i_1, v_1, v_2
+%     \end{Bmatrix}$1
+
+(c) Building an observer 
+
+Simplifying the ODE, 
+\begin{align*}
+    C\,\dot v_1 -C\,\dot v_3 - i_2 &= 0 & \implies C\,\dot v_3 &= \frac{v_3 - v_4}{R_2}.\\
+\end{align*}
+The measurement equation:
+\begin{align*}
+    y = v_4.
+\end{align*}
+The observer design is 
+\begin{align*}
+    \dot{\hat v}_3 = \frac{\hat v_3 - v_4}{R_2\,C_c} + K\,\left(v_4 - 0\right)
+\end{align*}
+
+The poles for the observer is 
+\begin{align*}
+    \alpha_\mathcal{O}(s) &= \det\left(s\,I - A + K\,C\right) \\
+    &= s - \frac{1}{R_2\,C_c} + k_1\times 0.
+\end{align*}
+
+% Assuming that $R_1 = R_2 = R_3 = R$.
+% 
+% The poles for the observer is 
+% \begin{align*}
+%     \alpha_\mathcal{O}(s) &= \det\left(s\,E - A + K\,C\right) \\
+%     &= \left(2\,C_{c}\,R^2-C_{c}\,R^2\,k_{1}+C_{c}\,R^2\,k_{2}+C_{c}\,R^2\,k_{3}-3\,C_{c}\,R^2\,k_{5}-3\,C_{c}\,R^2\,k_{6}-C_{c}\,R^3\,k_{7}\right)\,s \\
+%     &\quad + R-R\,k_{1}+R\,k_{3}-2\,R\,k_{5}-2\,R\,k_{6}-R^2\,k_{4}-R^2\,k_{7}
+% \end{align*}
+% 
+% Considering the following partitioned DAE, 
+% \begin{align*}
+%     \begin{pmatrix}
+%         0   & 0     & 0     & C_c   & 0     & -C_c  & 0 
+%     \end{pmatrix}\,\dot X &= \begin{pmatrix}
+%         0   & 1     & 0     & 0     & 0     & 0     & 0 
+%     \end{pmatrix}\,X
+%     \\
+%     \begin{pmatrix}
+%         %   i1  & i2    & i3    & v1    & v2    & v3    & v4     
+%             0   & 0     & 0     & 0     & 0     & 0     & 0 \\
+%             0   & 0     & 0     & 0     & 0     & 0     & 0 \\
+%             0   & 0     & 0     & 0     & 0     & 0     & 0  \\
+%             0   & 0     & 0     & 0     & 0     & 0     & 0  \\
+%             0   & 0     & 0     & 0     & 0     & 0     & 0  \\
+%             0   & 0     & 0     & 0     & 0     & 0     & 0 
+%         \end{pmatrix}\,\dot X &= \begin{pmatrix}
+%     %   i1    & i2  & i3    & v1    & v2    & v3    & v4    
+%         -R_1& 0     & 0     & -1    & 0     & 0     & 0 \\
+%         0   & -R_2  & 0     & 0     & 0     & 1     & -1 \\
+%         0   & 0     & -R_3  & 1     & 0     & 0     & -1 \\
+%         0   & 0     & 0     & 1     & -1    & 0     & 0\\
+%         0   & 0     & 0     & 0     & 1     & 0     & 0\\
+%         1   & -1    & -1    & 0     & 0     & 0     & 0
+%     \end{pmatrix}\,X + \begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \end{pmatrix}\,u
+% \end{align*}
+% The ODE part of the model with the measurements is 
+% \begin{align*}
+%     C_c\,\dot v_1 - C_c\,\dot v_3 = i_2 \text{ reduces to } \dot v_3 = \frac{v_4 - v_3}{R_2\,C_c}, \text{ since } v_1 = v_2 = 0, \qquad y = v_4
+% \end{align*}
+% % reduces to 
+% % \begin{align*}
+% %     \begin{pmatrix}
+% %         0   & 0     & 0     & 0     & 0     & 1     & 0 
+% %     \end{pmatrix}\,\dot X &= \frac{-1}{R_2\,C_c}\begin{pmatrix}
+% %         0   & 0     & 0     & 0     & 0     & 1     & -1 
+% %     \end{pmatrix}\,X & \text{i.e.,}\ & \dot v_3 = \frac{-1}{R_2\,C_c}\,\left(v_3 - v_4\right)\\ 
+% %     y &= \begin{pmatrix}
+% %         0   & 0     & 0     & 0     & 0     & 0     & 1
+% %     \end{pmatrix}\,X & & y = v_4
+% % \end{align*}
+% The observer for estimating $\hat v_3$ is 
+% \begin{align*}
+%     \dot{\hat{v}}_3 &= \frac{1}{R_2\,C_c}\,\left(\hat v_4 - \hat v_3\right)  + K\,\cancelto{0}{\left(y - \hat v_4\right)}
+% \end{align*}
+% The observer will have the poles at $\frac{-1}{R_2\,C_c}$
+
+% The other 'states' in the system can be determined as 
+% \begin{align*}
+%     \hat v_2 &= 0 & 
+%     \hat v_1 &= \hat v_2 & 
+%     \hat i_1 &= \frac{u - \hat v_1}{R_1}, & \\
+%     \hat i_2 &= \frac{\hat v_3 - \hat v_4}{R_2}, & 
+%     \hat i_3 &= {\hat v_1 - \hat v_4}{R_3}, & 
+% \end{align*}

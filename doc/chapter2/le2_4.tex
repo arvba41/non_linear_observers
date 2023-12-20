@@ -1,0 +1,72 @@
+\section{Le 2.4}
+Considering the ODE
+\begin{align*}
+    \dot x &= 1 & y &= x^3
+\end{align*}
+Let, 
+\begin{align*}
+    F(x) &= \begin{pmatrix}
+        h(x) \\ L_fh(x) \\ \vdots \\ L_f^qh(x)
+    \end{pmatrix} = \begin{pmatrix}
+        x^3 \\ 3x^2 \\ 6x \\ \vdots 
+    \end{pmatrix}
+\end{align*}
+The system is indeed locally weakly observable. 1
+% The locally weakly observable at $x = 0$ is 
+% \begin{align*}
+%     \frac{\partial}{\partial x}F(x)\Big|_{x = 0} &= \frac{\partial}{\partial x}\begin{pmatrix}
+%         h(x) \\ L_fh(x) \\ L_f^2h(x)
+%     \end{pmatrix}_{x = 0} = \begin{pmatrix}
+%         3x^2 \\ 6x \\ 6
+%     \end{pmatrix}_{x = 0} = \begin{pmatrix}
+%         0 \\ 0 \\ 6
+%     \end{pmatrix} \text{ is full-rank}
+% \end{align*}
+% $\frac{\partial}{\partial x}F(x)\Big|_{x = 0}$ is full-rank when $q = 2$, clearly $q > n$.
+
+Considering the ODE
+\begin{align*}
+    \dot x &= 1 & y &= x\,e^{-1/x^2}
+\end{align*}
+\begin{align*}
+    F(x) &= \begin{pmatrix}
+        h(x) \\ L_fh(x) \\ \vdots \\ L_f^qh(x)
+    \end{pmatrix} = \begin{pmatrix}
+        x\,e^{-1/x^2} \\ \vdots 
+    \end{pmatrix}
+\end{align*}
+Since $x\,e^{-1/x^2}|_{x = 0}$ is $\div 0$. Therefore the locally weakly observable at $x = 0$ is defined as 
+\begin{align*}
+    \lim_{x \to 0} \frac{\partial}{\partial x}F(x) &= \lim_{x \to 0} \frac{\partial}{\partial x}\begin{pmatrix}
+        h(x) 
+    \end{pmatrix} \\ 
+    &= \lim_{x \to 0} \begin{pmatrix}
+        x\,\lambda + \frac{2\,\lambda}{x^2} \\
+        \frac{4\,\lambda}{x^5} - \frac{2\,\lambda}{x^3} \\
+        \frac{6\,\lambda}{x^4} - \frac{24\,\lambda}{x^6} + \frac{8\,\lambda}{x^8} \\
+        \vdots 
+    \end{pmatrix} \\
+    &= \begin{pmatrix}
+        0 \\ 0 \\ 0 \\ \vdots 
+    \end{pmatrix},
+\end{align*}
+where $\lambda = e^{-1/x^2}$
+
+In this case, even as $q \to \infty$, the matrix is not full-rank as $x \to 0$. However, the system is locally weakly observable.
+
+\fbox{
+    \parbox{0.95\textwidth}{
+        Even if $q$ is $\infty$, it does not imply that the system is not observable. 
+    }
+}
+
+\subsection*{Code}
+\begin{matlabcode}
+syms x f(x) h(x)
+f(x) = 1; h(x) = x*exp(-1/x^2);
+F(x) = [h(x)*f(x);...
+    diff(h(x),x)*f(x); ...
+    diff(diff(h(x),x),x)*f(x);...
+    diff(diff(diff(h(x),x),x),x)*f(x)];
+dF(x) = diff(F(x),x); val = limit(dF(x),x,0); rank_Fx = rank(val)
+\end{matlabcode}

@@ -1,0 +1,44 @@
+\section{Le 2.5}
+Model, let:
+\begin{align*}
+    A &= f_x(x)\Big|_{x = x^0} \quad C = h_x(x)\Big|_{x = x^0},
+\end{align*}
+where $f_x(x) = u$ and $h_x(x) = x^2$. 
+
+At $x^0 = 0$, the observability matrix of $\left(C,\ A\right)$ is 
+\begin{align*}
+    \mathcal{O}x = \begin{pmatrix}
+        h_x(x)|_{x = 0}
+    \end{pmatrix} = \begin{pmatrix}
+        2\,x
+    \end{pmatrix}_{x = 0} = 0.
+\end{align*}
+It is not full-rank and from the linearization. However, the system is \emph{locally weakly observable}. 
+
+\fbox{\parbox{0.95\textwidth}{
+    Nothing can be concluded about the system's observability if $C$ and $A$ are not observable.
+}}
+
+% However, considering the Lie derivatives, 
+% \begin{align*}
+%     \frac{\partial }{\partial x}F\left(x\right)\Big|_{x = 0} = \frac{\partial }{\partial x}\begin{pmatrix}
+%         L_f^0\,h(x) \\ \vdots \\ L_f^q\,h(x)
+%     \end{pmatrix} = \begin{pmatrix}
+%         2\,x\,u \\ 2\,u
+%     \end{pmatrix}_{x = 0} = \begin{pmatrix}
+%         0 \\ 2\,u
+%     \end{pmatrix}
+% \end{align*}
+% It is full-rank and \emph{is locally weakly observable} at $x_0 = 0\ \forall\ u \neq 0$. 
+
+% Looking at the system 
+% \begin{align*}
+%     \dot x &= u, \quad y = x^2.
+% \end{align*}
+% The system is \textbf{not} \emph{locally observable} at $x^0 = 0$ because the output $y = 0$ at $x^0 = 0$ and the initial states are indistuinguable. However, in the neighborhood around $x^0 = 0$, $y \neq 0$ and the states are distuinguable thus \emph{locally weakly observable} if $u \neq 0$. At $u = 0$, the states are 'constant' w.r.t time and the system cannot be exited therefore the system is \textbf{neither} \emph{locally observable} \textbf{nor} \emph{locally weakly observable} at $u = 0$.
+
+% \fbox{
+%     \parbox{0.98\textwidth}{
+%         With the linearization of the model to $A = f_x(x)\Big|_{x = x^0},\ C = h_x(x)\Big|_{x = x^0}$, the local observability is captured for $\mathcal{U} \subset \mathcal{M}$. However, the state (excitation signal for the state) dependents on $u$, and for certain values of $u$, the system cannot be exited and this information is lost by linearization.
+%     }
+% }

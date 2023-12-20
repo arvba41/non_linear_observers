@@ -1,0 +1,184 @@
+\section{Le 1.4} 
+Compute the observability gramian as a function of $\mathbf{\epsilon}$ and interpret the result.
+\newcommand{\gramian}{\begin{pmatrix}
+    \sigma_{1} & \sigma_{2} \\
+    \sigma_{2} & \sigma_{3}
+\end{pmatrix}}
+
+\begin{align*}
+    \dot x &= \begin{pmatrix}
+        -2 & -1 \\
+        \epsilon & -1
+    \end{pmatrix}\,x \\
+    y &= \begin{pmatrix}
+        1 & 1
+    \end{pmatrix}\,x
+\end{align*}
+
+the gramian is given as
+\begin{align}
+    \Sigma_o = \int_{0}^{\infty} \exp\left(A^Tt\right)\,C^T\,C\,\exp\left(At\right) dt = \int_{0}^{\infty} \mathcal{X} dt \label{eq:le41}
+\end{align}
+
+or the solution to the Lyapunov equation,
+\begin{align*}
+    A^T\,\Sigma_o + \Sigma_o\,A + C^T\,C = 0,
+\end{align*}
+substituing $A$ and $C$, 
+\begin{align*}
+    \begin{pmatrix}
+        -2 & -1 \\
+        \epsilon & -1
+    \end{pmatrix}^T\,\Sigma_o + \Sigma_o\,\begin{pmatrix}
+        -2 & -1 \\
+        \epsilon & -1
+    \end{pmatrix} + \begin{pmatrix}
+        1 & 1
+    \end{pmatrix}^T\,\begin{pmatrix}
+        1 & 1
+    \end{pmatrix} &= 0,\\
+    \begin{pmatrix}
+        -2 & -1 \\
+        \epsilon & -1
+    \end{pmatrix}^T\,\Sigma_o + \Sigma_o\,\begin{pmatrix}
+        -2 & -1 \\
+        \epsilon & -1
+    \end{pmatrix} &= - \begin{pmatrix}
+        1 & 1 \\
+        1 & 1
+    \end{pmatrix},\\
+\end{align*}
+Let, 
+\begin{align*}
+    \Sigma_o = \gramian,
+\end{align*}
+then, 
+\begin{align*}
+    \begin{pmatrix}
+        -2 & \epsilon \\
+        -1 & -1
+    \end{pmatrix}\,\gramian + \gramian\,\begin{pmatrix}
+        -2 & -1 \\
+        \epsilon & -1
+    \end{pmatrix} + \begin{pmatrix}
+        1 & 1 \\
+        1 & 1
+    \end{pmatrix}, &= 0\\
+    \implies \begin{pmatrix}
+        \epsilon\,\sigma_2 - 2\sigma_1 & \epsilon\,\sigma_3 - 2\sigma_2 \\
+        -\sigma_1 - \sigma_2 & - \sigma_2 - \sigma_3
+    \end{pmatrix} + \begin{pmatrix}
+        \epsilon\,\sigma_2 - 2\sigma_1 & -\sigma_1 - \sigma_2 \\
+        \epsilon\,\sigma_3 - 2\sigma_2 & - \sigma_2 - \sigma_3
+    \end{pmatrix} + \begin{pmatrix}
+        1 & 1 \\
+        1 & 1
+    \end{pmatrix}, &= 0\\
+    \implies \begin{pmatrix}
+        2\epsilon\,\sigma_2 - 4\sigma_1 & \epsilon\,\sigma_3 - 3\sigma_2 - \sigma_1 \\
+        \epsilon\,\sigma_3 - 3\sigma_2 - \sigma_1 & 2\sigma_2 - 2\sigma_3
+    \end{pmatrix} + \begin{pmatrix}
+        1 & 1 \\
+        1 & 1
+    \end{pmatrix}, &= 0\\
+    \implies \begin{pmatrix}
+        2\epsilon\,\sigma_2 - 4\sigma_1 + 1 & \epsilon\,\sigma_3 - 3\sigma_2 - \sigma_1 + 1\\
+        \epsilon\,\sigma_3 - 3\sigma_2 - \sigma_1 + 1 & 2\sigma_2 - 2\sigma_3 + 1
+    \end{pmatrix}  &= 0,\\
+    \implies 2\epsilon\,\sigma_2 - 4\sigma_1 + 1 &= 0 \\
+    \epsilon\,\sigma_3 - 3\sigma_2 - \sigma_1 + 1 &= 0\\
+    2\sigma_2 - 2\sigma_3 + 1 &= 0.\\
+    \Sigma_o = \frac{1}{6\,\left(\epsilon + 2\right)}\,\begin{pmatrix}
+        \epsilon^2 + 3\,\epsilon + 3 & 2\,\epsilon + 3  \\
+        2\,\epsilon + 3 & \epsilon + 3
+    \end{pmatrix}
+\end{align*}
+For $\Sigma_o$ to have full-rank, $\det\left(\Sigma_o\right) \neq 0$, i.e., 
+\begin{align*}
+    \frac{1}{6\,\left(\epsilon + 2\right)} &\neq 0, & \text{i.e., } \epsilon^2 + \epsilon &\neq 0
+\end{align*}
+For $\epsilon = -2$, $\Sigma_o$ is signular.
+
+For $\epsilon = 0$, rank$\left(\Sigma_o\right) = 1$. 
+
+% $\Sigma_o$ is full-column rank for $\epsilon \neq 0 $ and $\epsilon \neq -\frac{36}{25} $.
+
+% i.e., 
+% \begin{align*}
+%     -4\,\Sigma_{11} + \epsilon\,\Sigma_{21} + \epsilon\,\Sigma_{12} + 1 &= 0\\
+%     -3\,\Sigma_{12} + \epsilon\,\Sigma_{22} -\Sigma_{11} + 1 &= 0\\
+%     -\Sigma_{11} -3\,\Sigma_{21} + \epsilon\,\Sigma_{22} + 1 &= 0\\
+%     -\Sigma_{12} -2\,\Sigma_{22} -\Sigma_{21} + 1 &= 0
+% \end{align*}
+% substituing $A$ and $C$, 
+% \begin{align*}
+%     \mathcal{X} &= \exp\left(\begin{pmatrix}
+%         -2 & \epsilon \\
+%         -1 & -1
+%     \end{pmatrix}t\right)\,\begin{pmatrix}
+%         1 \\
+%         1
+%     \end{pmatrix}\,\begin{pmatrix}
+%         1 & 1
+%     \end{pmatrix}\,\exp\left(\begin{pmatrix}
+%         -2 & -1 \\
+%         \epsilon & -1
+%     \end{pmatrix}t\right) \\
+%     &= \begin{pmatrix}
+%         \exp\left(-2t\right) + \exp\left(t\epsilon^*\right) \\
+%         2\exp\left(-t\right)
+%     \end{pmatrix}\,\begin{pmatrix}
+%         1 & 1
+%     \end{pmatrix}\,\exp\left(\begin{pmatrix}
+%         -2 & -1 \\
+%         \epsilon & -1
+%     \end{pmatrix}t\right) \\
+%     &= \begin{pmatrix}
+%         \exp\left(-2t\right) + \exp\left(t\epsilon^*\right) & \exp\left(-2t\right) + \exp\left(t\epsilon^*\right) \\
+%         2\exp\left(-t\right) & 2\exp\left(-t\right)
+%     \end{pmatrix}\,\exp\left(\begin{pmatrix}
+%         -2 & -1 \\
+%         \epsilon & -1
+%     \end{pmatrix}t\right) \\
+%     &= \begin{pmatrix}
+%         e^{-4t}\,\left(e^{t\left(\epsilon + 2\right))} + 1\right)\,\left(e^{t\left(\epsilon^* + 2\right))} + 1\right) & %% exp(-4*t)*(exp(t*(epsilon + 2)) + 1)*(exp(t*(conj(epsilon) + 2)) + 1)
+%         2e^{-t}\,\left(e^{t\epsilon^*} + e^{-2t}\right) \\
+%         2e^{-3t}\,\left(e^{t\left(\epsilon + 2\right)} + 1\right) & 4e^{-2t}
+%     \end{pmatrix} 
+% \end{align*}
+% \eqref{eq:le41} becomes
+% \begin{align}
+%     \Sigma_o &= \begin{pmatrix}
+%         \int_{0}^{\infty} e^{-4t}\,\left(e^{t\left(\epsilon + 2\right))} + 1\right)\,\left(e^{t\left(\epsilon^* + 2\right))} + 1\right)\,dt & %% exp(-4*t)*(exp(t*(epsilon + 2)) + 1)*(exp(t*(conj(epsilon) + 2)) + 1)
+%         \int_{0}^{\infty} 2e^{-t}\,\left(e^{t\epsilon^*} + e^{-2t}\right) \,dt\\
+%         \int_{0}^{\infty} 2e^{-3t}\,\left(e^{t\left(\epsilon + 2\right)} + 1\right)\,dt & 
+%         \int_{0}^{\infty} 4e^{-2t}\,dt 
+%     \end{pmatrix} \nonumber\\
+%     &= \begin{pmatrix}
+%         \left[\sigma_1\right]_0^\infty & \left[\sigma_2\right]_0^\infty\\
+%         \left[\sigma_3\right]_0^\infty & 
+%         \left[-2e^{-2t}\right]_0^\infty % \left[\right]_0^\infty
+%     \end{pmatrix} = \begin{pmatrix}
+%         \left[\sigma_1\right]_0^\infty & \left[\sigma_2\right]_0^\infty\\
+%         \left[\sigma_3\right]_0^\infty & 2
+%     \end{pmatrix}, \label{eq:le42}
+% \end{align}
+% where
+% \begin{align*}
+%     \sigma_1 &= \frac{e^{t\left(\epsilon^* - 2\right)}}{\epsilon^* - 2} - \frac{e^{-4t}}{4} + \frac{e^{t\left(\epsilon - 2\right)}}{\epsilon - 2} + \frac{e^{\left(t\,\left(\epsilon^2 + |\epsilon|^2\right)\right)/\epsilon}}{2\Re{\left(\epsilon\right)}}\\
+%     \sigma_2 &= \frac{2e^{t\left(\epsilon - 1\right)}}{\epsilon - 1} - \frac{2e^{-3t}}{3} \\
+%     \sigma_3 &= \frac{2e^{t\left(\epsilon^* - 1\right)}}{\epsilon^* - 1} - \frac{2e^{-3t}}{3}
+% \end{align*}
+% and 
+% \begin{align*}
+%     \left[\sigma_1\right]_0^\infty &= \left[\frac{e^{t\left(\epsilon^* - 2\right)}}{\epsilon^* - 2}\right]_0^\infty + \frac{1}{4} + \left[\frac{e^{t\left(\epsilon - 2\right)}}{\epsilon - 2}\right]_0^\infty + \left[\frac{e^{\left(t\,\left(\epsilon^2 + |\epsilon|^2\right)\right)/\epsilon}}{2\Re{\left(\epsilon\right)}}\right]_0^\infty &
+%     \left[\sigma_2\right]_0^\infty &= \left[\frac{2e^{t\left(\epsilon - 1\right)}}{\epsilon - 1}\right]_0^\infty + \frac{2}{3} \\
+%     \left[\sigma_3\right]_0^\infty &= \left[\frac{2e^{t\left(\epsilon^* - 1\right)}}{\epsilon^* - 1}\right]_0^\infty + \frac{2}{3} & & .
+% \end{align*}
+% Assuming $\epsilon < 2, \epsilon \neq 0$, and is real,
+% \begin{align*}
+%     \left[\sigma_1\right]_0^\infty &= \frac{1}{4} - \frac{2}{\epsilon - 2} - \frac{1}{2\epsilon} &
+%     \left[\sigma_2\right]_0^\infty &= \frac{2}{3} - \frac{2}{\epsilon - 1}\\
+%     \left[\sigma_3\right]_0^\infty &= \frac{2}{3} - \frac{2}{\epsilon - 1} & & .
+% \end{align*}
+% Substituting in \eqref{eq:le42}, the rank is 2 (full column rank).

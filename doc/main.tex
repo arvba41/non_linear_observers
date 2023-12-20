@@ -1,0 +1,146 @@
+\documentclass[a4paper]{book}
+
+%% Language and font encodings
+%\usepackage{fontspec}
+%\setmainfont{Times New Roman}\usepackage{CormorantGaramond}
+\usepackage[toc,page]{appendix}
+\usepackage[T1]{fontenc}
+% \usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage[swedish, english]{babel}
+\usepackage{float}
+\usepackage[colorlinks=true, allcolors=black]{hyperref}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\urlstyle{tt}
+\newcommand{\email}[1]{\href{mailto:#1}{\tt{\nolinkurl{#1}}}}
+\newcommand{\orcid}[1]{ORCID: \href{https://orcid.org/#1}{\tt{\nolinkurl{#1}}}}
+
+\usepackage[parfill]{parskip}
+\renewcommand*\oldstylenums[1]{\carlitoOsF #1}
+% \usepackage{fancyhdr}
+%\usepackage{natbib}
+\usepackage{authblk}
+\setlength{\headheight}{41pt}
+\setlength{\textwidth}{440pt}
+%\pagestyle{fancy}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{mathtools}
+
+\usepackage{titlesec}
+\setcounter{secnumdepth}{4}
+
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{-}
+\rmfamily
+% \fancyhead[L]{\rmfamily Bi-MMC battery}
+
+\usepackage{xspace}
+
+% \usepackage[utf8]{inputenc}
+
+%% Package to import MATLAB codes
+\usepackage{listings}
+\lstset{ 
+	language=Matlab,                		% choose the language of the code
+%	basicstyle=10pt,       				% the size of the fonts that are used for the code
+	numbers=left,                  			% where to put the line-numbers
+	numberstyle=\footnotesize,      		% the size of the fonts that are used for the line-numbers
+	stepnumber=1,                   			% the step between two line-numbers. If it's 1 each line will be numbered
+	numbersep=5pt,                  		% how far the line-numbers are from the code
+%	backgroundcolor=\color{white},  	% choose the background color. You must add \usepackage{color}
+	showspaces=false,               		% show spaces adding particular underscores
+	showstringspaces=false,         		% underline spaces within strings
+	showtabs=false,                 			% show tabs within strings adding particular underscores
+%	frame=single,	                			% adds a frame around the code
+%	tabsize=2,                				% sets default tabsize to 2 spaces
+%	captionpos=b,                   			% sets the caption-position to bottom
+	breaklines=true,                			% sets automatic line breaking
+	breakatwhitespace=false,        		% sets if automatic breaks should only happen at whitespace
+	escapeinside={\%*}{*)}          		% if you want to add a comment within your code
+}
+
+\usepackage{layouts} %% used for textwidth and textheight
+
+\usepackage{matlab}
+
+%% cancelling values
+\usepackage[makeroom]{cancel}
+
+%% theorem 
+\newtheorem{theorem}{Theorem}
+
+\title{\Large Non-linear $\mathcal{O}$bservers Course}
+\author{Arvind Balachandran}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\pagenumbering{gobble}
+\newpage
+\pagenumbering{arabic}
+
+\chapter{Observers for Linear Systems}
+\input{sections/le1_1.tex}
+\clearpage
+\input{sections/le1_2.tex} 
+\clearpage
+\input{sections/le1_3.tex}
+\clearpage
+\input{sections/le1_4.tex}
+\clearpage
+\input{sections/le1_5.tex}
+\clearpage
+\input{sections/le1_6.tex}
+\clearpage
+\input{sections/le1_231a.tex}
+\input{sections/le1_233a.tex}
+\input{sections/le1_2315.tex}
+\input{sections/le1_2316ab.tex}
+\clearpage
+\input{sections/le1_437.tex}
+\clearpage
+\input{sections/le1_438.tex}
+\clearpage
+\input{sections/le1_439.tex}
+\clearpage
+\input{sections/le1_434.tex}
+\clearpage
+
+\chapter{Observers for DAEs and non-Linear Systems}
+\input{chapter2/le2_1.tex}
+\clearpage 
+\input{chapter2/le2_2.tex}
+\clearpage
+\input{chapter2/le2_3.tex}
+\clearpage
+\input{chapter2/le2_4.tex}
+\clearpage
+\input{chapter2/le2_5.tex}
+\clearpage
+\input{chapter2/le2_6.tex}
+\clearpage
+\input{chapter2/le2_8.tex}
+
+\newpage
+The width of a text is:
+\printinunitsof{cm}\prntlen{\textwidth} (\printinunitsof{in}\prntlen{\textwidth}) \\
+The width of a column is:
+\printinunitsof{cm}\prntlen{\columnwidth} (\printinunitsof{in}\prntlen{\columnwidth}) \\
+The height of a column is:
+\printinunitsof{cm}\prntlen{\textheight} (\printinunitsof{in}\prntlen{\textheight}) \\ 
+\end{document}

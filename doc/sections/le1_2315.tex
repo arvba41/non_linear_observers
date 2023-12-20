@@ -1,0 +1,32 @@
+\section{Kilath 2.3-15}
+\begin{align*}
+    A &= \begin{pmatrix} 
+        \lambda_{1} &   &   \\
+            & \ddots    &   \\
+            &           & \lambda_{n}
+        \end{pmatrix} & C &= \begin{pmatrix}
+            \gamma_1 & \dots & \gamma_n
+        \end{pmatrix}.v
+\end{align*}
+The observability matrix is 
+\begin{align*}
+    \mathcal{O} &= \begin{pmatrix}
+        C \\
+        C\,A \\
+        \vdots \\
+        C\,A^2
+    \end{pmatrix} = \begin{pmatrix}
+        \gamma_1 & \dots & \gamma_n \\
+        \lambda_{1}\gamma_1 & \dots & \lambda_{n}\gamma_n \\
+        \vdots & \ddots & \vdots \\
+        \lambda_{1}^{n-1}\gamma_1 & \dots & \lambda_{n}^{n-1}\gamma_n \\
+    \end{pmatrix} = \begin{pmatrix}
+        \gamma_1 & \dots & \gamma_n
+    \end{pmatrix}\,\begin{pmatrix}
+        1 & \dots & 1 \\
+        \lambda_{1} & \dots & \lambda_{n} \\
+        \vdots & \ddots & \vdots \\
+        \lambda_{1}^{n-1} & \dots & \lambda_{n}^{n-1} \\
+    \end{pmatrix}.
+\end{align*}
+The rank$\left(\mathcal{O}\right) = n$ when $\lambda_i$ is unique, $\lambda_i \neq 1$, and $\gamma_i \neq 0$. 

@@ -1,0 +1,216 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Le2_6</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-12-01"><meta name="DC.source" content="Le2_6.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">original system</a></li><li><a href="#3">observer design</a></li><li><a href="#4">error signals</a></li><li><a href="#5">plots</a></li></ul></div><pre class="codeinput">clear; clc;
+</pre><h2 id="2">original system</h2><pre class="codeinput">u = @(t) 0;
+fx = @(t,x) [ x(2) ;<span class="keyword">...</span>
+            -x(2) - sin(x(1)) + u(t)];
+
+tspan = [0 4];
+y0 = [pi/3; 0];
+[t,y] = ode45(@(t,y) fx(t,y),tspan,y0);
+</pre><h2 id="3">observer design</h2><pre class="codeinput">y_val = @(tt) interp1(t,y(:,1),tt,<span class="string">'spline'</span>);
+beta = 5;
+K = [beta; 1];
+fo = @(t,x) fx(t,x) + K * (y_val(t) - x(1));
+
+y0 = [-pi/6; -pi/10];
+[to,yo] = ode45(@(t,y) fo(t,y),tspan,y0);
+</pre><h2 id="4">error signals</h2><pre class="codeinput">yoo = interp1(t,y,to,<span class="string">'spline'</span>);
+err = (yo - yoo);
+</pre><h2 id="5">plots</h2><pre class="codeinput">figure(1); clf;
+tiledlayout(3,2)
+
+<span class="comment">% nexttile([1 2]);</span>
+<span class="comment">% plot(y(:,1),y(:,2)); grid off; box off;</span>
+<span class="comment">% ylabel('$x_2$','Interpreter','latex');</span>
+<span class="comment">% xlabel('$x_1$','Interpreter','latex');</span>
+
+ax(1) = nexttile([2 1]);
+plot(t,rad2deg(y(:,1))); hold <span class="string">on</span>
+plot(to,rad2deg(yo(:,1))); grid <span class="string">off</span>; box <span class="string">off</span>;
+ylabel(<span class="string">'$x_1$ [$^\circ$]'</span>,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>);
+xlabel(<span class="string">'$t$ [s]'</span>,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>);
+
+ax(2) = nexttile([2 1]);
+plot(t,rad2deg(y(:,2))); hold <span class="string">on</span>
+plot(to,rad2deg(yo(:,2))); grid <span class="string">off</span>; box <span class="string">off</span>;
+ylabel(<span class="string">'$x_2$ [$^\circ$/s]'</span>,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>);
+xlabel(<span class="string">'$t$ [s]'</span>,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>);
+
+ax(3) = nexttile();
+plot(to,rad2deg(err(:,1))); box <span class="string">off</span>
+ylabel(<span class="string">'$e_1$ [$^\circ$]'</span>,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>);
+xlabel(<span class="string">'$t$ [s]'</span>,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>);
+yline(0,<span class="string">'--'</span>)
+
+ax(4) = nexttile();
+plot(to,rad2deg(err(:,2))); box <span class="string">off</span>
+ylabel(<span class="string">'$e_2$ [$^\circ$/s]'</span>,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>);
+xlabel(<span class="string">'$t$ [s]'</span>,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>);
+yline(0,<span class="string">'--'</span>)
+
+linkaxes(ax,<span class="string">'x'</span>)
+
+<span class="comment">% Get latex font in ticks</span>
+h = findall(gcf,<span class="string">'Type'</span>,<span class="string">'axes'</span>); <span class="comment">% An array if you have subplots</span>
+set(h, <span class="string">'TickLabelInterpreter'</span>, <span class="string">'latex'</span>)
+
+textwidth = 13;
+golden_ratio = (1 + sqrt(5)) / 2;
+textheight = textwidth / golden_ratio;
+figsize = [textwidth, textheight];
+
+newcolors = [<span class="string">"#1f77b4"</span> <span class="string">"#ff7f0e"</span> <span class="string">"#2ca02c"</span> <span class="string">"#d62728"</span>];
+colororder(newcolors)
+
+<span class="comment">% Set size and no crop</span>
+set(gcf, <span class="string">'PaperUnits'</span>, <span class="string">'centimeters'</span>, <span class="string">'PaperSize'</span>, figsize);
+set(gcf, <span class="string">'PaperUnits'</span>, <span class="string">'normalized'</span>, <span class="string">'PaperPosition'</span>, [0, 0, 1, 1]);
+
+print <span class="string">-dpdf</span> <span class="string">../doc/figures/ex2_6.pdf</span>
+</pre><img vspace="5" hspace="5" src="Le2_6_01.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clear; clc;
+
+%% original system
+u = @(t) 0;
+fx = @(t,x) [ x(2) ;...
+            -x(2) - sin(x(1)) + u(t)];
+
+tspan = [0 4]; 
+y0 = [pi/3; 0];
+[t,y] = ode45(@(t,y) fx(t,y),tspan,y0);
+
+%% observer design 
+y_val = @(tt) interp1(t,y(:,1),tt,'spline');
+beta = 5;
+K = [beta; 1];
+fo = @(t,x) fx(t,x) + K * (y_val(t) - x(1));
+
+y0 = [-pi/6; -pi/10];
+[to,yo] = ode45(@(t,y) fo(t,y),tspan,y0);
+
+%% error signals
+yoo = interp1(t,y,to,'spline');
+err = (yo - yoo);
+%% plots
+figure(1); clf; 
+tiledlayout(3,2)
+
+% nexttile([1 2]);
+% plot(y(:,1),y(:,2)); grid off; box off;
+% ylabel('$x_2$','Interpreter','latex');
+% xlabel('$x_1$','Interpreter','latex');
+
+ax(1) = nexttile([2 1]);
+plot(t,rad2deg(y(:,1))); hold on
+plot(to,rad2deg(yo(:,1))); grid off; box off;
+ylabel('$x_1$ [$^\circ$]','Interpreter','latex');
+xlabel('$t$ [s]','Interpreter','latex');
+
+ax(2) = nexttile([2 1]);
+plot(t,rad2deg(y(:,2))); hold on
+plot(to,rad2deg(yo(:,2))); grid off; box off;
+ylabel('$x_2$ [$^\circ$/s]','Interpreter','latex');
+xlabel('$t$ [s]','Interpreter','latex');
+
+ax(3) = nexttile();
+plot(to,rad2deg(err(:,1))); box off
+ylabel('$e_1$ [$^\circ$]','Interpreter','latex');
+xlabel('$t$ [s]','Interpreter','latex');
+yline(0,'REPLACE_WITH_DASH_DASH')
+
+ax(4) = nexttile();
+plot(to,rad2deg(err(:,2))); box off
+ylabel('$e_2$ [$^\circ$/s]','Interpreter','latex');
+xlabel('$t$ [s]','Interpreter','latex');
+yline(0,'REPLACE_WITH_DASH_DASH')
+
+linkaxes(ax,'x')
+
+% Get latex font in ticks
+h = findall(gcf,'Type','axes'); % An array if you have subplots
+set(h, 'TickLabelInterpreter', 'latex')
+
+textwidth = 13;
+golden_ratio = (1 + sqrt(5)) / 2;
+textheight = textwidth / golden_ratio;
+figsize = [textwidth, textheight];
+
+newcolors = ["#1f77b4" "#ff7f0e" "#2ca02c" "#d62728"];
+colororder(newcolors)
+
+% Set size and no crop
+set(gcf, 'PaperUnits', 'centimeters', 'PaperSize', figsize);
+set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
+
+print -dpdf ../doc/figures/ex2_6.pdf
+##### SOURCE END #####
+--></body></html>

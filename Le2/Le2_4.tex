@@ -1,0 +1,110 @@
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and export to LaTeX again.
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{epstopdf}
+\usepackage[table]{xcolor}
+\usepackage{matlab}
+
+\sloppy
+\epstopdfsetup{outdir=./}
+\graphicspath{ {./Le2_4_images/} }
+
+\begin{document}
+
+\begin{matlabcode}
+clear;
+syms x f(x) h(x)
+f(x) = 1;
+h(x) = x^3;
+
+F(x) = [h(x)*f(x); ...
+    diff(h(x),x)*f(x); ...
+    diff(diff(h(x),x),x)*f(x)] ...
+%     diff(diff(diff(h(x),x),x),x)*f(x)]
+\end{matlabcode}
+\begin{matlabsymbolicoutput}
+F(x) = 
+
+\hskip1em $\displaystyle \left(\begin{array}{c}
+x^3 \\
+3\,x^2 \\
+6\,x
+\end{array}\right)$
+\end{matlabsymbolicoutput}
+\begin{matlabcode}
+dF(x) = diff(F(x),x);
+rank_Fx = rank(dF(0))
+\end{matlabcode}
+\begin{matlaboutput}
+rank_Fx = 1
+\end{matlaboutput}
+
+
+\begin{matlabcode}
+clear;
+syms x f(x) h(x)
+f(x) = 1;
+h(x) = x*exp(-1/x^2);
+
+F(x) = [h(x)*f(x);...
+    diff(h(x),x)*f(x); ...
+    diff(diff(h(x),x),x)*f(x);...
+    diff(diff(diff(h(x),x),x),x)*f(x); ...
+    diff(diff(diff(diff(h(x),x),x),x),x)*f(x); ...
+    diff(diff(diff(diff(diff(h(x),x),x),x),x),x)*f(x); ...
+    diff(diff(diff(diff(diff(diff(h(x),x),x),x),x),x))*f(x)];
+dF(x) = diff(F(x),x)
+\end{matlabcode}
+\begin{matlabsymbolicoutput}
+dF(x) = 
+
+\hskip1em $\displaystyle \begin{array}{l}
+\left(\begin{array}{c}
+\sigma_1 +\frac{2\,\sigma_1 }{x^2 }\\
+\frac{4\,\sigma_1 }{x^5 }-\frac{2\,\sigma_1 }{x^3 }\\
+\frac{6\,\sigma_1 }{x^4 }-\frac{24\,\sigma_1 }{x^6 }+\frac{8\,\sigma_1 }{x^8 }\\
+\frac{156\,\sigma_1 }{x^7 }-\frac{24\,\sigma_1 }{x^5 }-\frac{112\,\sigma_1 }{x^9 }+\frac{16\,\sigma_1 }{x^{11} }\\
+\frac{120\,\sigma_1 }{x^6 }-\frac{1140\,\sigma_1 }{x^8 }+\frac{1320\,\sigma_1 }{x^{10} }-\frac{400\,\sigma_1 }{x^{12} }+\frac{32\,\sigma_1 }{x^{14} }\\
+\frac{9360\,\sigma_1 }{x^9 }-\frac{720\,\sigma_1 }{x^7 }-\frac{15480\,\sigma_1 }{x^{11} }+\frac{7440\,\sigma_1 }{x^{13} }-\frac{1248\,\sigma_1 }{x^{15} }+\frac{64\,\sigma_1 }{x^{17} }\\
+\frac{5040\,\sigma_1 }{x^8 }-\frac{85680\,\sigma_1 }{x^{10} }+\frac{189000\,\sigma_1 }{x^{12} }-\frac{127680\,\sigma_1 }{x^{14} }+\frac{33600\,\sigma_1 }{x^{16} }-\frac{3584\,\sigma_1 }{x^{18} }+\frac{128\,\sigma_1 }{x^{20} }
+\end{array}\right)\\
+\mathrm{}\\
+\textrm{where}\\
+\mathrm{}\\
+\;\;\sigma_1 ={\mathrm{e}}^{-\frac{1}{x^2 }} 
+\end{array}$
+\end{matlabsymbolicoutput}
+\begin{matlabcode}
+val = limit(dF(x),x,0)
+\end{matlabcode}
+\begin{matlabsymbolicoutput}
+val = 
+
+\hskip1em $\displaystyle \left(\begin{array}{c}
+0\\
+0\\
+0\\
+0\\
+0\\
+0\\
+0
+\end{array}\right)$
+\end{matlabsymbolicoutput}
+\begin{matlabcode}
+rank_Fx = rank(val)
+\end{matlabcode}
+\begin{matlaboutput}
+rank_Fx = 0
+\end{matlaboutput}
+
+\end{document}
