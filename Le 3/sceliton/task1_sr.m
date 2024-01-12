@@ -79,7 +79,7 @@ modelEKF.R = diag([100 5]) * 10;
 init.x0 = [10; 5; 0]; % Initial stafte estimate 
 init.P0 = diag([1000, 1000, 0]); % Initial covariance
 tStart = tic; 
-xhatEKF = EKF(modelEKF,init,data); 
+xhatEKF = EKF_sr(modelEKF,init,data);
 tELF_run = toc(tStart);
 
 %% performing an optimization
@@ -90,7 +90,7 @@ exitflag = 0;
 
 x0 = [0 0 0.1 ...
     3 10 ...
-    10, 5, 0.1]; % initial guess
+    10, 5, 1]; % initial guess
 
 options = optimoptions('lsqnonlin','Display','iter','FunctionTolerance',1e-12);
 
@@ -105,7 +105,7 @@ modelEKF.Q = diag(x(1:3));
 modelEKF.R = diag(x(4:5));
 init.P0 = diag([x(6) x(7) x(8)]); % Initial covariance
 
-tic; xhatEKF_opt = EKF(modelEKF,init,data); toc
+tic; xhatEKF_opt = EKF_sr(modelEKF,init,data); toc
 
 % %% performing an optimization for all 
 % 
@@ -201,7 +201,7 @@ set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 newcolors = ["#1f77b4" "#ff7f0e" "#2ca02c" "#d62728"];
 colororder(newcolors)
 
-print -dpdf task1.pdf
+print -dpdf task1_sr.pdf
 
 %%
 figure(20)
@@ -300,7 +300,7 @@ modelEKF.R = diag([x(4) x(5)]);
 
 init.x0 = [10; 5; 0]; % Initial stafte estimate 
 init.P0 = diag([x(6) x(7) x(8)]); % Initial covariance
-Xhat = EKF(modelEKF,init,data);
+Xhat = EKF_sr(modelEKF,init,data);
 end 
 
 function residual = EKF_res(x,data,params)
