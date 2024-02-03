@@ -4,7 +4,6 @@ plots = false; %
 saveplots = false;
 
 %% Simulate robot movement
-
 % parameters 
 params.Ts = 0.1;
 params.V = 3;
@@ -51,7 +50,7 @@ tELF(1) = toc(tStart);
 
 % EKF with SR-alg
 tStart = tic; 
-xhatEKF_SR = EKF_sr(modelEKF,init,data); 
+xhatEKF_SR = EKF_sr_new(modelEKF,init,data); 
 tELF_SR(1) = toc(tStart);
 
 %% performing an optimization

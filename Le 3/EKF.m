@@ -11,7 +11,8 @@ function xhat = EKF(model,init,data)
     Ht = model.hx(xhat(:,ii));
     Kt = P * Ht' / (Ht * P * Ht' + model.R);
     xhat(:,ii) = xhat(:,ii) + Kt * (data.y(:, ii) - model.h(xhat(:, ii)));
-
+    P = P - Kt * Ht * P;
+    
     % Time update
     xhat(:,ii+1) = model.f(xhat(:, ii), data.u(ii));
     Ft = model.fx(xhat(:, ii));

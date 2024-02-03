@@ -1,6 +1,6 @@
 function plot_error(figno,data,xhatEKF,xhatEKF_opt,saveplots,filename)
 
-    figure(figno)
+    figure(figno); clf; set(gcf,'WindowStyle','docked');
     
     tiledlayout(2,3,'TileIndexing','columnmajor');
     

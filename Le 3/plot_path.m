@@ -1,7 +1,7 @@
 %% Plot path 
 function plot_path(figno,data,xhatEKF,xhatEKF_opt,saveplots,filename)
 
-figure(figno); clf; 
+figure(figno); clf; set(gcf,'WindowStyle','docked');
 
 tiledlayout(1,3)
 

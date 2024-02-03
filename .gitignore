@@ -487,6 +487,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# Ignoring main.pdf file
-doc/main.pdf
+# Ignoring .slxc files due to simulink
+*.slxc
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,macos,emacs,latex,matlab,visualstudiocode

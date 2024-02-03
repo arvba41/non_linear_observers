@@ -110,7 +110,7 @@ set(h, 'TickLabelInterpreter', 'latex')
 set(gcf, 'PaperUnits', 'centimeters', 'PaperSize', figsize);
 set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 
-print -dpdf ../doc/figures/ex6_p1.pdf
+% print -dpdf ../doc/figures/ex6_p1.pdf
 %% plots
 
 figure(2); clf; 
@@ -159,7 +159,7 @@ set(h, 'TickLabelInterpreter', 'latex')
 set(gcf, 'PaperUnits', 'centimeters', 'PaperSize', figsize);
 set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 
-print -dpdf ../doc/figures/ex6_p2.pdf
+% print -dpdf ../doc/figures/ex6_p2.pdf
 
 %% functions 
 function xdot = full_order(x,y,A,C)
