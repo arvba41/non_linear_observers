@@ -57,6 +57,18 @@ xlabel('$x_n$','Interpreter','latex');
 h = findall(gcf,'Type','Axes');
 set(h,'TickLabelInterpreter','latex');
 
+% saving plots
+textwidth = 14.9;
+golden_ratio = (1 + sqrt(5));
+textheight = textwidth / golden_ratio;
+figsize = [textwidth, textheight];
+
+% Set size and no crop
+set(gcf, 'PaperUnits', 'centimeters', 'PaperSize', figsize);
+set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
+
+print -dpdf ../doc/figures/ex4_b2a.pdf
+
 %% number of effective particles
 Neff = 1 / sum(wn.^2);
 
@@ -85,6 +97,18 @@ xlabel('$x_r$','Interpreter','latex');
 
 h = findall(gcf,'Type','Axes');
 set(h,'TickLabelInterpreter','latex');
+
+% saving plots
+textwidth = 14.9;
+golden_ratio = (1 + sqrt(5));
+textheight = textwidth / golden_ratio;
+figsize = [textwidth, textheight];
+
+% Set size and no crop
+set(gcf, 'PaperUnits', 'centimeters', 'PaperSize', figsize);
+set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
+
+print -dpdf ../doc/figures/ex4_b2b.pdf
 
 %% Expextec value of x
 x_hat = mean(xr); % mean value

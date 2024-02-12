@@ -80,16 +80,16 @@ title('Disharging OCV','Interpreter','latex');
 h = findall(gcf,'Type','Axes');
 set(h,'TickLabelInterpreter','latex');
 %% battery ocv curve export
-data.qbatt = qbatt_crg;
-data.vbatt = vbatt_crg;
+data.qbatt = qbatt_int;
+data.vbatt = vbatt_crg_int;
 save('ocv_data','data');
 %% simulating test cycle
 Qo = 24;
-C_rate = 0.8;
+C_rate = 1;
 I = Qo * C_rate;
 cyc_time = Qo / I * 3600;
 Qinit = 80;
-tend = 6 * 3600;
+tend = 24 * 3600;
 
 % simulating the simulink model 
 simdata = sim("simple_battery_mdl_cycle.slx");
@@ -122,16 +122,16 @@ xlabel('$t$ [s]','Interpreter','latex');
 h = findall(gcf,'Type','Axes');
 set(h,'TickLabelInterpreter','latex');
 %% exporting simlated data
-cyc_data.tsim = tsim;
+cyc_data.tsim   = tsim;
 cyc_data.ibatt  = ibatt;
 cyc_data.vbatt  = vbatt;
 cyc_data.soc    = SOC;
 cyc_data.Qinit  = Qinit;
 save('cyc_data','cyc_data');
 %% processing data with noise and also incrasing the sample time to 100s
-tprc = tsim(1):5:tsim(end);
+tprc = tsim(1):10:tsim(end);
 
-n_ibatt = randn(size(tprc)) * sqrt(0.5) + 0.5 * sin(2 * pi * 50 * tprc);
+n_ibatt = (randn(size(tprc)) * sqrt(0.5) + 0.5 * sin(2 * pi * 50 * tprc));
 n_vbatt = randn(size(tprc)) * sqrt(0.5e-3);
 ibatt_prc = interp1(tsim,ibatt,tprc,'nearest') + n_ibatt;
 vbatt_prc = interp1(tsim,vbatt,tprc,'linear') + n_vbatt;

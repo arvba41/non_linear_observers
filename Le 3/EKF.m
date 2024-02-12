@@ -1,5 +1,6 @@
 function xhat = EKF(model,init,data)
-
+    
+  %% global Kt
   M = length(data.y);
   P = init.P0;
   n = numel(init.x0);

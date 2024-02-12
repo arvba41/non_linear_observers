@@ -18,8 +18,8 @@ n=3;      % number of states
 q = 0.01;   % std of process 
 r = 1;  % std of measurement
 
-Qs = diag([0.05 0.05 0.05]); % std matrix of process
-Rs = diag([0.08, 0.2]); % std of measurement  
+Qs = diag([0 0 0]); % std matrix of process
+Rs = diag([0.6, 0.03].^2); % std of measurement  
 
 f = @(x,i) [x(1) + Ts*V*cos(x(3));...
         x(2) + Ts*V*sin(x(3));...

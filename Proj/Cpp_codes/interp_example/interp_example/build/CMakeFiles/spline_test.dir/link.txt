@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/spline_test.dir/test_interp1.cc.o CMakeFiles/spline_test.dir/interp.cc.o -o spline_test  /usr/local/lib/liblapacke.a /usr/local/lib/liblapack.a /usr/local/lib/libblas.a -lgfortran 

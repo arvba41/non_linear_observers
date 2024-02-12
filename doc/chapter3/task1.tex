@@ -20,7 +20,7 @@ However, the covariance matrices ($Q, R$), and the initial covariance matrix ($P
 
     $Q$ is assumed as the variance in the model (not covariances, since it is a diagonal matrix) and since, in this case, $G$ (noise 'component' to the model), is non-existent, that is why low values of Q are assumed.
 
-    $R$ is assumed as the variance in the measurement. High values are chosen because the gain is high. 
+    $R$ is assumed as the variance in the measurement. High values are chosen because I want to trust the measurements less and more focus on the model.
 
     $P_0$ is the initial co-variance matrix (how much we trust the initial guess), and low values are chosen for top-right and bottom-left since the initial guesses are quite good for $x$ and $\theta$, but the initial guess for $y$ is bad.
 }}
@@ -28,32 +28,30 @@ However, the covariance matrices ($Q, R$), and the initial covariance matrix ($P
 A least-square optimization is performed to determine the matrices $Q$, $R$, and $P_0$. The matrices are
 \begin{align*}
     Q &= \begin{pmatrix}
-        8978 & & \\ & 0 & \\ & & 0.012
-    \end{pmatrix}, & 
+        0.022 & & \\ & 0.0321 & \\ & & 3\times10^{-14} 
+    \end{pmatrix}, \\
     R &= \begin{pmatrix}
-        0 & \\ & 0.57
-    \end{pmatrix}, & 
+        712.5 & \\ & 0.034
+    \end{pmatrix}, \\
     P_0 &= \begin{pmatrix}
-        1.33 & & \\ & 4.42 & \\ & & 0
+        2\times10^{-5} & & \\ & 3\times10^{5} & \\ & & 2\times10^{-14}
     \end{pmatrix}
 \end{align*}
 
-The results of the optimization do not seem to agree with my guess. No idea why.
+The results of the optimization seem to agree with my idea.
 
 An array square-root algorithm was implemented and optimization resulted in the following covariance matrices:
 \begin{align*}
     Q &= \begin{pmatrix}
-        0.077 & & \\ & 0.0032 & \\ & & 0
-    \end{pmatrix}, & 
+        0.0081 & & \\ & 4\times10^{-10} & \\ & & 2\times10^{-12}
+    \end{pmatrix}, \\
     R &= \begin{pmatrix}
-        1.511 & \\ & 0 
-    \end{pmatrix}, & 
+        27.13 & \\ & 1.94
+    \end{pmatrix}, \\
     P_0 &= \begin{pmatrix}
-        5.51 & & \\ & 31.96 & \\ & & 0.0011
+        10.28 & & \\ & 334.73 & \\ & & 5\times10^{-8}
     \end{pmatrix}
 \end{align*}
-
-\clearpage 
 
 The results from EKF for robot tracking is 
 
@@ -65,7 +63,7 @@ The results from EKF for robot tracking with array SR implementation is
 
 
 \fbox{\parbox{0.98\textwidth}{
-    Cannot say why the SR algorithm performs much better than EKF. 
+    Both have similar performance.
 }}
 
 
