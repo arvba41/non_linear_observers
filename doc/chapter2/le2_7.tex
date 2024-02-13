@@ -1,0 +1,26 @@
+\section{Le 2.7}
+Consider the system,
+\begin{align*}
+    \dot x &= f(x) + g(x)\,u & y &= h(x)
+\end{align*}
+differentiating $y(t)$ one time 
+\begin{align*}
+    \dot y(t) &= \frac{\partial h(x)}{\partial x}\,\dot x = \frac{\partial h(x)}{\partial x}\,\left(f(x) + g(x)\,u\right) = L_f\,h(x) + L_g\,h(x)\,u.
+\end{align*}
+Similarly, 
+\begin{align*}
+    L_f^2\,h(x) &= \frac{\partial L_f\,h(x)}{\partial x}\,f(x), & L_g\,L_f\,h(x) &= \frac{\partial L_f\,h(x)}{\partial x}\,g(x)
+\end{align*}
+The system is of relative degree equal to the number of states $n$, then 
+\begin{align*}
+    L_g\,L_f^k\,h(x) &= 0, \forall\ x\ \in\ \mathcal{N}(x^0)\ \forall\ k < n - 1 & L_g\,L_f^{n-1}\,h(x) &\neq 0.
+\end{align*}
+Considering the observability criteria, 
+\begin{align*}
+    \mathcal{O} &= \frac{\partial}{\partial x}\begin{pmatrix} 
+        h(x) \\ L_f\,h(x) \\ \vdots \\ L_f^{n-1}h(x) 
+    \end{pmatrix} = \begin{pmatrix}
+        L_f\,h(x) \\ L_f^2\,h(x) \\ \vdots \\ L_f^{n}h(x) 
+    \end{pmatrix}.
+\end{align*}
+The rank of $\mathcal{O}$ is equal to $n$, the number of states if the relative degree equal to the number of states.
