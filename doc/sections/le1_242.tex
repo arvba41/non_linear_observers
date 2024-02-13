@@ -1,0 +1,20 @@
+\section{Kilath 2.4-2}
+\begin{align*}
+    A &= \begin{pmatrix}
+        -0.5 & 1 & 0 \\ -1 & -0.5 & 0 \\ 0 & 1 & 0
+    \end{pmatrix} \qquad B = \begin{pmatrix}
+        1 \\ 2 \\ 0
+    \end{pmatrix} \qquad C = \begin{pmatrix}
+        0 & 0 & 1
+    \end{pmatrix}
+\end{align*}
+
+The observability matrix is 
+\begin{align*}
+    \mathcal{O} &= \begin{pmatrix}
+        C \\ C\,A \\ C\,A^2
+    \end{pmatrix} = \begin{pmatrix}
+        0 & 0 & 1 \\ 0 & 1 & 0 \\ -1 & -0.5 & 0
+    \end{pmatrix}
+\end{align*}
+The system is completely observable.

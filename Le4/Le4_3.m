@@ -61,7 +61,7 @@ figsize = [textwidth, textheight];
 set(gcf, 'PaperUnits', 'centimeters', 'PaperSize', figsize);
 set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 
-% print -dpdf ../doc/figures/ex4_c_sim.pdf
+print -dpdf ../doc/figures/ex4_c_sim.pdf
 
 %% EKF estimation
 

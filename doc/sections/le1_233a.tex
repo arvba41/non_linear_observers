@@ -4,8 +4,8 @@ Realizing linear system to state-space
     y &= e\,\frac{s+1}{s\left(s+3\right)} \\ y &= \left(u - y\frac{k}{s+a}\right)\,\frac{s+1}{s\left(s+3\right)} \\ 
     y &= u\,\frac{s+1}{s\left(s+3\right)} - y\,\frac{k\,\left(s+1\right)}{s\left(s+3\right)\left(s+a\right)}\\
     y + y\,\frac{k\,\left(s+1\right)}{s\left(s+3\right)\left(s+a\right)} &= u\,\frac{s+1}{s\left(s+3\right)} \\
-    \frac{y\,s\left(s+3\right)\left(s+a\right) + y\,k\,\left(s+1\right)}{s\left(s+3\right)\left(s+a\right)} &= u\,\frac{s+1}{s\left(s+3\right)}\\
-    \frac{y\,s\left(s+3\right)\left(s+a\right) + y\,k\,\left(s+1\right)}{\left(s+a\right)} &= u\,\left(s+1\right) \\
+    y\,\frac{s\left(s+3\right)\left(s+a\right) + k\,\left(s+1\right)}{s\left(s+3\right)\left(s+a\right)} &= u\,\frac{s+1}{s\left(s+3\right)}\\
+    y\,\frac{s\left(s+3\right)\left(s+a\right) + k\,\left(s+1\right)}{\left(s+a\right)} &= u\,\left(s+1\right) \\
     y\,s\left(s+3\right)\left(s+a\right) + y\,k\,\left(s+1\right) &= u\,\left(s+1\right)\,\left(s+a\right)\\
     y\,s\left(s^2+s\left(3+a\right)+3a\right) + y\,k\,\left(s+1\right) &= u\,\left(s^2+s\left(1+a\right)+a\right) \\
     y\left(s^3+s^2\left(3+a\right)+3a\,s\right) + y\,k\,s + y\,k &= u\,\left(s^2+s\left(1+a\right)+a\right) \\
@@ -55,4 +55,4 @@ Controllability and observability
         (a + 3)^2 -k -3a    & -\left(a +3\right) & 1
     \end{pmatrix}
 \end{align*}
-Observability on $k$.
+Full-rank $\forall$ $k$ and $a$.

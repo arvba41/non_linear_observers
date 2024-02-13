@@ -1,0 +1,41 @@
+\section{Kilath 2.4-4}
+The equation is 
+\begin{align*}
+    y(t) &+ a_1\,y(t-1) + \cdots + a_n\,y(t-n) = b_1\,u(t-1) + \cdots + b_n\,u(t-n) \\
+    \implies y(t) &= -a_1\,y(t-1) - \cdots - a_n\,y(t-n) + b_1\,u(t-1) + \cdots + b_n\,u(t-n) 
+    % \text{also, } \implies y(t-1) &= \frac{1}{a_1}\left(-1 -\cdots - a_n\,y(t-n) + b_1\,u(t-1) + \cdots + b_n\,u(t-n)\right) \\
+    % \text{also, } \implies u(t-1) &= \frac{1}{b_1}\left(y(t) + a_1\,y(t-1) + \cdots + a_n\,y(t-n) - b_2\,u(t-2) - \cdots - b_n\,u(t-n)\right)
+\end{align*}
+
+In the discretized form, the state vector is
+\begin{align*}
+    \theta(t) &= \begin{pmatrix}
+        y(t) & y(t-1) & \cdots & y(t-n+1) & u(t-1) & u(t-2) & \cdots & u(t-n+1)
+    \end{pmatrix}^\text{T} \\
+    \theta(t-1) &= \begin{pmatrix}
+        y(t-1) & y(t-2) & \cdots & y(t-n) & u(t-2) & u(t-3) & \cdots & u(t-n)
+    \end{pmatrix}^\text{T} \\
+    \text{i.e., } \theta(t) &= A\,\theta(t-1) + B\,u(t-1),
+\end{align*}
+where
+\begin{align*}
+    A &= \begin{pmatrix}
+        -a_1 & \cdots & -a_n & b_2 & \cdots & b_n \\
+        1 & \ddots & 0 & 0 & \ddots & 0 \\
+        \vdots & & \vdots & \vdots & & \vdots \\ 
+        0 & 1 & 0 & 0 & \cdots & 0 \\
+        0 & \cdots & 0 & 0 & \cdots & 0 \\
+        0 & \cdots & 0 & 1 & \cdots & 0 \\
+        \vdots & \ddots & 0 & 0 & \ddots & \vdots \\
+        0 & \cdots & 0 & 0 & \cdots & 1 \\
+    \end{pmatrix}, & B &= \begin{pmatrix}
+        b_1 \\
+        0 \\
+        \vdots\\ 
+        0 \\
+        1 \\
+        0 \\
+        \vdots \\
+        0
+    \end{pmatrix}
+\end{align*}
