@@ -26,7 +26,7 @@ plot(1:params.N,data.x); box off; hold on
 ylabel('$x$','Interpreter','latex');
 xlabel('$k$','Interpreter','latex');
 ylim([-40 40])
-legend('mesh','true'); legend('Interpreter','latex');
+% legend('mesh','true'); legend('Interpreter','latex');
 
 nexttile();
 plot(1:params.N,data.y); box off; hold on
