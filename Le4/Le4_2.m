@@ -4,7 +4,7 @@ clear; clc;
 N = 100; 
 w = 1 / N * ones(1,N);
 for ii = 1:N
-    x(ii) = rand;
+    x(ii) = 2*rand() - 1;
 end
 
 [fx,xk] = ksdensity(x);
@@ -22,6 +22,7 @@ nexttile();
 plot(xk,fx); box off;
 ylabel('$f(x)$','Interpreter','latex');
 xlabel('$x$','Interpreter','latex');
+% kde does not look nice becuase it has bounded support.
 
 h = findall(gcf,'Type','Axes');
 set(h,'TickLabelInterpreter','latex');
@@ -38,18 +39,18 @@ set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 
 % print -dpdf ../doc/figures/ex4_b2a.pdf
 
-%% mesurement update
+w = ones(1,N) / N;%% mesurement update
 
 sigma = 0.1;
 mu = 0;
 y = 0.7; % measuremenrt sample
 for ii = 1:N
-    wn(ii) = normpdf(y - x(ii)^2, mu, sigma);
-    xn(ii) = rand; % new particles
+    wn(ii) = normpdf(y - x(ii)^2, mu, sigma) * w(ii);
+    % xn(ii) = 2*rand() - 1;% new particles
 end
 
 wu = wn / sum(wn); % weight update (normalized)
-[fxn,xnk] = ksdensity(xn);
+[fxn,xnk] = ksdensity(x,'Weights',wn);
 
 % plotting the particles and a kernel density estimate of the distribution
 % after measurement update
@@ -81,8 +82,15 @@ set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 
 % print -dpdf ../doc/figures/ex4_b2b.pdf
 
+% %% Y plots
+% 
+% y = ;
+% [fy,yk]=ksdensity(y);
+
+
+
 %% number of effective particles
-Neff = 1 / sum(wn.^2);
+Neff = 1 / sum(wu.^2); % 
 
 %% resampling
 % the goal to re-sample use xn and then sample randomly around 

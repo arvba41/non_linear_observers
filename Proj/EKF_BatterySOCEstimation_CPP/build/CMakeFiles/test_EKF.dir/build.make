@@ -73,29 +73,29 @@ CMakeFiles/test_EKF.dir/test_EKF.cc.o: CMakeFiles/test_EKF.dir/flags.make
 CMakeFiles/test_EKF.dir/test_EKF.cc.o: /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/test_EKF.cc
 CMakeFiles/test_EKF.dir/test_EKF.cc.o: CMakeFiles/test_EKF.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test_EKF.dir/test_EKF.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_EKF.dir/test_EKF.cc.o -MF CMakeFiles/test_EKF.dir/test_EKF.cc.o.d -o CMakeFiles/test_EKF.dir/test_EKF.cc.o -c /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/test_EKF.cc
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_EKF.dir/test_EKF.cc.o -MF CMakeFiles/test_EKF.dir/test_EKF.cc.o.d -o CMakeFiles/test_EKF.dir/test_EKF.cc.o -c /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/test_EKF.cc
 
 CMakeFiles/test_EKF.dir/test_EKF.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test_EKF.dir/test_EKF.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/test_EKF.cc > CMakeFiles/test_EKF.dir/test_EKF.cc.i
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/test_EKF.cc > CMakeFiles/test_EKF.dir/test_EKF.cc.i
 
 CMakeFiles/test_EKF.dir/test_EKF.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_EKF.dir/test_EKF.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/test_EKF.cc -o CMakeFiles/test_EKF.dir/test_EKF.cc.s
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/test_EKF.cc -o CMakeFiles/test_EKF.dir/test_EKF.cc.s
 
 CMakeFiles/test_EKF.dir/interp.cc.o: CMakeFiles/test_EKF.dir/flags.make
 CMakeFiles/test_EKF.dir/interp.cc.o: /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/interp.cc
 CMakeFiles/test_EKF.dir/interp.cc.o: CMakeFiles/test_EKF.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_EKF.dir/interp.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_EKF.dir/interp.cc.o -MF CMakeFiles/test_EKF.dir/interp.cc.o.d -o CMakeFiles/test_EKF.dir/interp.cc.o -c /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/interp.cc
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_EKF.dir/interp.cc.o -MF CMakeFiles/test_EKF.dir/interp.cc.o.d -o CMakeFiles/test_EKF.dir/interp.cc.o -c /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/interp.cc
 
 CMakeFiles/test_EKF.dir/interp.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test_EKF.dir/interp.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/interp.cc > CMakeFiles/test_EKF.dir/interp.cc.i
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/interp.cc > CMakeFiles/test_EKF.dir/interp.cc.i
 
 CMakeFiles/test_EKF.dir/interp.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_EKF.dir/interp.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/interp.cc -o CMakeFiles/test_EKF.dir/interp.cc.s
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/interp.cc -o CMakeFiles/test_EKF.dir/interp.cc.s
 
 # Object files for target test_EKF
 test_EKF_OBJECTS = \

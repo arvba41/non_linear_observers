@@ -7,7 +7,7 @@ N = 500;
 w = 1/N + zeros(1,N);
 
 for ii = 1:N
-    x(ii) = normrnd(0,1) * w(ii);
+    x(ii) = normrnd(0,1);
 end
 
 [fx,xk]=ksdensity(x);
@@ -15,12 +15,20 @@ end
 % plots section 1s
 figure(10); clf; set(gcf,'WindowStyle','docked');
 
-tiledlayout(1,2)
+tiledlayout(2,2)
+
+nexttile();
+plot(x); box off;
+ylabel('$x$','Interpreter','latex');
 
 nexttile();
 stem(x,w); box off;
 ylabel('$w$','Interpreter','latex');
 xlabel('$x$','Interpreter','latex');
+
+nexttile();
+histogram(x); box off;
+ylabel('$x$','Interpreter','latex');
 
 nexttile();
 plot(xk,fx); box off;
@@ -31,8 +39,8 @@ h = findall(gcf,'Type','Axes');
 set(h,'TickLabelInterpreter','latex');
 
 % saving plots
-textwidth = 14;
-golden_ratio = (1 + sqrt(5));
+textwidth = 14.9;
+golden_ratio = (1 + sqrt(5)) * 0.5;
 textheight = textwidth / golden_ratio;
 figsize = [textwidth, textheight];
 
@@ -65,7 +73,7 @@ h = findall(gcf,'Type','Axes');
 set(h,'TickLabelInterpreter','latex');
 
 % saving plots
-textwidth = 14;
+textwidth = 14.9;
 golden_ratio = (1 + sqrt(5));
 textheight = textwidth / golden_ratio;
 figsize = [textwidth, textheight];
@@ -74,4 +82,4 @@ figsize = [textwidth, textheight];
 set(gcf, 'PaperUnits', 'centimeters', 'PaperSize', figsize);
 set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 
-print -dpdf ../doc/figures/ex4_b.pdf
+% print -dpdf ../doc/figures/ex4_b.pdf

@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/test_EKF.dir/test_EKF.cc.o CMakeFiles/test_EKF.dir/interp.cc.o -o test_EKF  /usr/local/lib/liblapacke.a /usr/local/lib/liblapack.a /usr/local/lib/libblas.a -lgfortran 
+/usr/bin/g++ -g CMakeFiles/test_EKF.dir/test_EKF.cc.o CMakeFiles/test_EKF.dir/interp.cc.o -o test_EKF  /usr/local/lib/liblapacke.a /usr/local/lib/liblapack.a /usr/local/lib/libblas.a -lgfortran 

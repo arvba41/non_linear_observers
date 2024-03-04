@@ -12,20 +12,6 @@ params.v_var = 1;
 noise = false;
 [~, data_tru] = sim_nlm(params,noise);
 
-% plot simulation data without noise
-% figure(10); clf; set(gcf,"WindowStyle",'docked');
-% tiledlayout(1,2);
-% 
-% nexttile();
-% plot(1:params.N,data_tru.x); box off;
-% ylabel('$x$','Interpreter','latex');
-% xlabel('$k$','Interpreter','latex');
-% 
-% nexttile();
-% plot(1:params.N,data_tru.y); box off;
-% ylabel('$y$','Interpreter','latex');
-% xlabel('$k$','Interpreter','latex');
-
 % simulation with noise
 noise = true;
 [model, data] = sim_nlm(params,noise);
@@ -52,7 +38,7 @@ h = findall(gcf,'Type','Axes');
 set(h,'TickLabelInterpreter','latex');
 
 % saving plots
-textwidth = 14;
+textwidth = 14.9;
 golden_ratio = (1 + sqrt(5));
 textheight = textwidth / golden_ratio;
 figsize = [textwidth, textheight];
@@ -61,7 +47,7 @@ figsize = [textwidth, textheight];
 set(gcf, 'PaperUnits', 'centimeters', 'PaperSize', figsize);
 set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 
-print -dpdf ../doc/figures/ex4_c_sim.pdf
+% print -dpdf ../doc/figures/ex4_c_sim.pdf
 
 %% EKF estimation
 
@@ -76,7 +62,7 @@ modelEKF.R = params.v_var;
 
 % initial guesses
 init.x0 = params.x0;
-init.P0 = 1;
+init.P0 = 2;
 
 xhatEKF = EKF(modelEKF, init, data); 
 
@@ -140,48 +126,49 @@ set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 
 N = 500; % particle filter number of samples
 
-xp = params.x0 + sqrt(params.w_var)*randn(1,N); % initial 500 samples
+xp = params.x0 + sqrt(2)*randn(1,N); % initial 500 samples
+w = ones(1,N) / N;
 
-x = params.x0; % initial guess
-y_mes = x^2 / 20 + sqrt(params.v_var) * randn; % measurement equation with noise
+% x = params.x0; % initial state
+% y = x^2 / 20 + sqrt(params.v_var) * randn; % measurement equation with noise
+% y = y_mes;
 % state estimates
-xhatPF_mean = x; 
-xhatPF_max = x;
-
+% xhatPF_mean = mean(sum(xp .* w)); 
+% xhatPF_max = mean(sum(xp .* w));
 
 % For visualization purposes
 [fxk(1,:),xk(1,:)] = ksdensity(xp);
 
-for ii = 2:params.N
-% time update
-    % state equation
-    x = 0.5 * x + 25 * x / (1 + x^2) + 8 * cos(1.2 * (ii - 1)) + ...
-        sqrt(params.w_var) * randn;
-    % measurement  equation
-    y = x^2 / 20 + params.v_var * randn;
-    % update xp
-    xp_nxt = 0.5 * xp + 25 * xp ./ (1 + xp.^2) + 8 * cos(1.2 * (ii - 1)) + ...
-            sqrt(params.w_var) * randn(1,N); 
+for ii = 1:params.N
 % measurement update
     % update y
-    y_nxt = xp.^2 / 20 + sqrt(params.v_var)*randn; 
+    y_nxt = xp.^2 / 20; % + sqrt(params.v_var)*randn; this is h(x) not h(x) + e
     % residual generation
-    e_res = y - y_nxt;
+    e_res = data.y(ii) - y_nxt;
     % updating weights
-    w = normpdf(e_res, 0, params.v_var);
+    w = normpdf(e_res, 0, sqrt(params.v_var)); % maybe w or maybe not (is erik lying?? No!)
     % normalizing weights
     w = w / sum(w);
     % resampling
     idx = resample(w);
-    xp = xp_nxt(idx);
+    xp = xp(idx);
+    % equal weights
+    w = ones(1,N) / N;
+
+% time update
+    % update xp
+    xp = 0.5 * xp + 25 * xp ./ (1 + xp.^2) + 8 * cos(1.2 * (ii - 1)) + ...
+            sqrt(params.w_var) * randn(1,N);
+
 % Estimate
     xhatPF_mean(ii) = mean(xp);
-    w = ones(size(w)) / sum(w); % re-distributiong equal weights
-    
+    % w = ones(size(w)) / N; % re-distributiong equal weights (not needed)
+    % xhatPF_max(ii) = max(xp);
     [fxk(ii,:),xk(ii,:)] = ksdensity(xp);
     % fxr = ksdensity(xp);
-    % [~,idx] = max(fxr);
-    % visualization of the particles
+    % [~,idx] = max(fxr); 
+
+% visualization of the particles
     % if ii == round(params.N / 2) || ii == params.N
     %     nexttile();
     %         stem(xp,w); box off
@@ -204,7 +191,7 @@ figure(13); clf; set(gcf,"WindowStyle",'docked');
 
 plot(1:params.N,xhatPF_mean); box off; hold on
 % plot(1:params.N,xhatPF_max,'--');
-scatter(1:params.N,data_tru.x,'kx');
+plot(1:params.N,data_tru.x,'k-');
 ylabel('$x$','Interpreter','latex');
 xlabel('$k$','Interpreter','latex');
 ylim([-40 40])
@@ -239,17 +226,36 @@ figure(100); set(gcf,'WindowStyle','docked'); clf;
     
 %% Quantitative comparison of the methods 
 
-SQE_X_EKF = sum((data_tru.x - xhatEKF).^2);
-SQE_X_PF = sum((data_tru.x - xhatPF_mean).^2);
+SQE_X_EKF = sum((data.x - xhatEKF).^2);
+SQE_X_PF = sum((data.x - xhatPF_mean).^2);
 
 figure(101); clf; set(gcf,'WindowStyle','docked');
 Y = [SQE_X_EKF, SQE_X_PF] / 1e3;
 bar(Y)
-text(1:length(Y),Y,num2str(round(Y)'),'vert','bottom','horiz','center','Interpreter','latex'); 
+text(1:length(Y),Y,num2str(round(Y,1)'),'vert','bottom','horiz','center','Interpreter','latex'); 
 box off
 
 ylabel('SQE [$\times10^3$]','Interpreter','latex');
 xticklabels({'EKF','PF'});
+
+    findall(gcf,'Type','Axes');
+    h = set(gca,'TickLabelInterpreter','latex');
+
+%% Quantitative comparison of the methods 
+Err_EKF = (data.x - xhatEKF);
+Err_PF = (data.x - xhatPF_mean);
+
+figure(102); clf; set(gcf,'WindowStyle','docked');
+% Y = [SQE_X_EKF, SQE_X_PF] / 1e3;
+plot(1:50,[Err_EKF; Err_PF])
+% text(1:length(Y),Y,num2str(round(Y)'),'vert','bottom','horiz','center','Interpreter','latex'); 
+box off
+
+legend('EKF','PF')
+legend('Interpreter','latex')
+ylabel('Error','Interpreter','latex');
+ylim([-40 40])
+% xticklabels({'EKF','PF'});
 
     findall(gcf,'Type','Axes');
     h = set(gca,'TickLabelInterpreter','latex');

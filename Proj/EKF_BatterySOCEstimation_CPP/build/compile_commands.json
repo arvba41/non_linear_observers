@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/build",
+  "command": "/usr/bin/g++   -g -Wall -Wextra -Wpedantic -o CMakeFiles/test_EKF.dir/test_EKF.cc.o -c /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/test_EKF.cc",
+  "file": "/home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/test_EKF.cc"
+},
+{
+  "directory": "/home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/build",
+  "command": "/usr/bin/g++   -g -Wall -Wextra -Wpedantic -o CMakeFiles/test_EKF.dir/interp.cc.o -c /home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/interp.cc",
+  "file": "/home/arvba41/courses/non_linear_observers/Proj/EKF_BatterySOCEstimation_CPP/interp.cc"
+}
+]

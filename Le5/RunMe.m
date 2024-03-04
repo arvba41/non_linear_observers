@@ -17,11 +17,11 @@ model.Q = model.B * 1 * model.B';
 x0 = [0;0]; 
 data.x = zeros(length(x0),N);
 data.y = zeros(1,N);
-data.x(:,1) = model.A * x0 + sqrt(1)*rand(2,1);
-data.y(:,1) = model.C * data.x(:,1) + sqrt(model.R)*randn(1);
+data.x(:,1) = model.A * x0 + sqrt(1) * rand(2,1);
+data.y(:,1) = model.C * data.x(:,1) + sqrt(model.R) * rand;
 for ii = 2:N
-    data.x(:,ii) = model.A * data.x(:,ii-1) + model.B*rand;
-    data.y(:,ii) = model.C * data.x(:,ii) + sqrt(model.R)*randn(1);
+    data.x(:,ii) = model.A * data.x(:,ii-1) + model.B * rand;
+    data.y(:,ii) = model.C * data.x(:,ii) + sqrt(model.R) * rand;
 end
 
 figure(10); clf; set(gcf,"WindowStyle",'docked');
@@ -31,7 +31,7 @@ nexttile();
 plot(1:N,data.x(1,:)); box off; hold on
 ylabel('$x_1$','Interpreter','latex');
 xlabel('$k$','Interpreter','latex');
-legend('mesh','true'); legend('Interpreter','latex');
+% legend('meas','true'); legend('Interpreter','latex');
 
 nexttile();
 plot(1:N,data.x(2,:)); box off; hold on
@@ -96,9 +96,10 @@ set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 %% Estimation using MHE 
 % initialization
 xhat_MHE = zeros(length(x0),N);
-xhat_MHE(:,1) = x0;
+% xhat_MHE(:,1) = x0;
+xhat_MHE(:,1) = data.x(:,1);
 
-T = 10; % minimum time for MHE to begin
+T = 2; % minimum time for MHE to begin
 
 while T <= N % run untill final time 
     xhat_MHE(:,T) = MHE(model,init,data,T); % estimate stat using MHE 
@@ -139,7 +140,6 @@ set(gcf, 'PaperUnits', 'centimeters', 'PaperSize', figsize);
 set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 
 % print -dpdf ../doc/figures/ex4_c_EKF.pdf
-
 
 %% FUNCTION: KF
 function xhat = KF(model,init,data)
@@ -190,10 +190,10 @@ w = opti.variable(1, T-1);      % noise variables
 X = opti.variable(2, T);        % state vector
 opti.subject_to(X(:, 1) == x0_hat);  % set initial state
 
-vk = opti.variable(1, T-1); % output error vector
+vk = opti.variable(1, T-1);     % output error vector (y - yk)
 % covariance matrices
-Q1 = diag(ones(1, T-1)) / R;    % measurement
-Q2 = diag(ones(1, T-1));        % states
+R_inv = diag(ones(1, T-1)) / R; % measurement deviation penalty
+Q_inv = diag(ones(1, T-1)) / 1; % states noise deviation penalty
 
 % simulating the states (multiple-shooting)
 for ii = 1:1:T-1
@@ -201,10 +201,10 @@ for ii = 1:1:T-1
     vk(ii) = y(ii) - C*X(:, ii);
 end
 
-opti.subject_to(0 <= w);    % noise to be grater than 1
+opti.subject_to(0 <= w);    % noise to be grater than 0
 
 % Cost funciont
-J = vk * Q1 * vk' + w * Q2 * w' + ...
+J = vk * R_inv * vk' + w * Q_inv * w' + ...
     (x0_hat - x0)' / P0 * (x0_hat - x0);
 
 opti.minimize(J);       % Onjective

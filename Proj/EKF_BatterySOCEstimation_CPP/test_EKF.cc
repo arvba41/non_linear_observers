@@ -40,6 +40,30 @@ operator<<(std::ostream &os, const Vec &v)
     return os;
 }
 
+// Creating a class for EKF with the iterpolation inside the class
+// class EKF
+// {
+// private:
+//     /* data */
+// public:
+// // Variables 
+//     double q; // charge of the battery
+//     double i; // battery current
+//     int Ts; // sample time 
+// // Methods
+//     double EKF(double q, double i, double v, int Ts, interp::Interp1 f_ocv)
+//     ~EKF
+// };
+
+// double EKF(double q, double i, double v, int Ts, interp::Interp1 f_ocv)
+// {
+
+// }
+
+// EKF
+// {
+// }
+
 double
 columb_counting(double q, double i, int Ts)
 {
@@ -103,9 +127,9 @@ int main()
 
     // // Print the OCV and SOC
     // std::cout << "OCV: " << ocv << "\n";
-    // std::cout << "SOC: " << soc << "\n";
-    // std::cout << "Example: f_ocv(33%) = " << f_ocv(24 * 0.3) << "\n";
-    // std::cout << "Example: f_ocv'(33%) = " << f_ocv.der(24 * 0.3) << "\n";
+    std::cout << "SOC: " << soc << "\n";
+    std::cout << "Example: f_ocv(33%) = " << f_ocv(24 * 0.3) << "\n";
+    std::cout << "Example: f_ocv'(33%) = " << f_ocv.der(24 * 0.3) << "\n";
 
     // Interpolate on a dense grid
     Vec soc_dense = linspace(0, 1, 200) * q_max;
