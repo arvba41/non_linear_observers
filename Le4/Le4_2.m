@@ -58,7 +58,7 @@ figure(11); clf; set(gcf,"WindowStyle","docked");
 tiledlayout(1,2)
 
 nexttile();
-stem(xn,wu); box off;
+stem(x,wu); box off;
 ylabel('$w_n$','Interpreter','latex');
 xlabel('$x_n$','Interpreter','latex');
 
@@ -88,7 +88,6 @@ set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 % [fy,yk]=ksdensity(y);
 
 
-
 %% number of effective particles
 Neff = 1 / sum(wu.^2); % 
 
@@ -96,7 +95,7 @@ Neff = 1 / sum(wu.^2); %
 % the goal to re-sample use xn and then sample randomly around 
 % a desired weight
 idx = resample(wu); % desired weight index
-xr = xn(idx);
+xr = x(idx);
 wr = ones(1,N) * 1/N;
 [fxr,xrk] = ksdensity(xr);
 

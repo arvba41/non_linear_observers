@@ -22,7 +22,7 @@ tiledlayout(1,2);
 
 nexttile();
 plot(1:params.N,data.x); box off; hold on
-scatter(1:params.N,data_tru.x,'kx');
+% scatter(1:params.N,data_tru.x,'kx');
 ylabel('$x$','Interpreter','latex');
 xlabel('$k$','Interpreter','latex');
 ylim([-40 40])
@@ -30,7 +30,7 @@ legend('mesh','true'); legend('Interpreter','latex');
 
 nexttile();
 plot(1:params.N,data.y); box off; hold on
-scatter(1:params.N,data_tru.y,'kx');
+% scatter(1:params.N,data_tru.y,'kx');
 ylabel('$y$','Interpreter','latex');
 xlabel('$k$','Interpreter','latex');
 
@@ -70,11 +70,11 @@ xhatEKF = EKF(modelEKF, init, data);
 figure(11); clf; set(gcf,"WindowStyle",'docked');
 
 plot(1:params.N,xhatEKF); box off; hold on
-scatter(1:params.N,data_tru.x,'kx');
+plot(1:params.N,data.x,'k');
 ylabel('$x$','Interpreter','latex');
 xlabel('$k$','Interpreter','latex');
 ylim([-40 40])
-legend('EKF','true'); legend('Interpreter','latex');
+legend('EKF','true'); legend('Interpreter','latex','NumColumns',2);
 
 h = findall(gcf,'Type','Axes');
 set(h,'TickLabelInterpreter','latex');
@@ -102,11 +102,11 @@ xhatEKF_opt = EKF(modelEKF, init, data);
 figure(12); clf; set(gcf,"WindowStyle",'docked');
 
 plot(1:params.N,xhatEKF); box off; hold on
-plot(1:params.N,xhatEKF_opt,'--');
-scatter(1:params.N,data_tru.x,'kx');
+% plot(1:params.N,xhatEKF_opt,'--');
+% scatter(1:params.N,data.x,'kx');
 ylabel('$x$','Interpreter','latex');
 xlabel('$k$','Interpreter','latex');
-legend('EKF','EKF-opt','true'); legend('Interpreter','latex');
+legend('EKF','EKF-opt','true'); legend('Interpreter','latex','NumColumns',2);
 ylim([-40 40])
 
 h = findall(gcf,'Type','Axes');
@@ -191,11 +191,11 @@ figure(13); clf; set(gcf,"WindowStyle",'docked');
 
 plot(1:params.N,xhatPF_mean); box off; hold on
 % plot(1:params.N,xhatPF_max,'--');
-plot(1:params.N,data_tru.x,'k-');
+plot(1:params.N,data.x,'k-');
 ylabel('$x$','Interpreter','latex');
 xlabel('$k$','Interpreter','latex');
 ylim([-40 40])
-legend('PF','true'); legend('Interpreter','latex');
+legend('PF','true'); legend('Interpreter','latex','NumColumns',2);
 
 h = findall(gcf,'Type','Axes');
 set(h,'TickLabelInterpreter','latex');

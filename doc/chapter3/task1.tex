@@ -29,10 +29,10 @@ A least-square optimization is performed to determine the matrices $Q$, $R$, and
 \begin{align*}
     Q &= \begin{pmatrix}
         0.1914 & & \\ & 0 & \\ & & 0
-    \end{pmatrix}, \\
+    \end{pmatrix}, & 
     R &= \begin{pmatrix}
         1.79\times10^5 & \\ & 0.87
-    \end{pmatrix}, \\
+    \end{pmatrix}, & 
     P_0 &= \begin{pmatrix}
         145.66 & & \\ & 1.43\times10^4 & \\ & & 0
     \end{pmatrix}
@@ -44,14 +44,16 @@ An array square-root algorithm was implemented and optimization resulted in the 
 \begin{align*}
     Q &= \begin{pmatrix}
         0.059 & & \\ & 0 & \\ & & 0
-    \end{pmatrix}, \\
+    \end{pmatrix}, & 
     R &= \begin{pmatrix}
         608.11 & \\ & 0.35
-    \end{pmatrix}, \\
+    \end{pmatrix}, & 
     P_0 &= \begin{pmatrix}
         56.96 & & \\ & 1.4\times10^5 & \\ & & 0
     \end{pmatrix}
 \end{align*}
+
+\newpage
 
 The results from EKF for robot tracking is 
 
@@ -61,12 +63,11 @@ The results from EKF for robot tracking with array SR implementation is
 
 \includegraphics{figures/EKF_Le3_SR.pdf}
 
+\fbox{\parbox{0.5\textwidth}{
+    Both the mothods have similar performance.
+}} 
 
-\fbox{\parbox{0.98\textwidth}{
-    Both have similar performance.
-}}
-
-The code is available at \href{https://github.com/arvba41/non_linear_observers/tree/main/Le203}{\faGithub\xspace}
+The code is available at \href{https://github.com/arvba41/non_linear_observers/tree/main/Le3}{\faGithub\xspace}.
 
 
 % The non-linear system is 
