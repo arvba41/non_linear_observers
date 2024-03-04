@@ -28,13 +28,13 @@ However, the covariance matrices ($Q, R$), and the initial covariance matrix ($P
 A least-square optimization is performed to determine the matrices $Q$, $R$, and $P_0$. The matrices are
 \begin{align*}
     Q &= \begin{pmatrix}
-        0.022 & & \\ & 0.0321 & \\ & & 3\times10^{-14} 
+        0.1914 & & \\ & 0 & \\ & & 0
     \end{pmatrix}, \\
     R &= \begin{pmatrix}
-        712.5 & \\ & 0.034
+        1.79\times10^5 & \\ & 0.87
     \end{pmatrix}, \\
     P_0 &= \begin{pmatrix}
-        2\times10^{-5} & & \\ & 3\times10^{5} & \\ & & 2\times10^{-14}
+        145.66 & & \\ & 1.43\times10^4 & \\ & & 0
     \end{pmatrix}
 \end{align*}
 
@@ -43,13 +43,13 @@ The results of the optimization seem to agree with my idea.
 An array square-root algorithm was implemented and optimization resulted in the following covariance matrices:
 \begin{align*}
     Q &= \begin{pmatrix}
-        0.0081 & & \\ & 4\times10^{-10} & \\ & & 2\times10^{-12}
+        0.059 & & \\ & 0 & \\ & & 0
     \end{pmatrix}, \\
     R &= \begin{pmatrix}
-        27.13 & \\ & 1.94
+        608.11 & \\ & 0.35
     \end{pmatrix}, \\
     P_0 &= \begin{pmatrix}
-        10.28 & & \\ & 334.73 & \\ & & 5\times10^{-8}
+        56.96 & & \\ & 1.4\times10^5 & \\ & & 0
     \end{pmatrix}
 \end{align*}
 
@@ -65,6 +65,8 @@ The results from EKF for robot tracking with array SR implementation is
 \fbox{\parbox{0.98\textwidth}{
     Both have similar performance.
 }}
+
+The code is available at \href{https://github.com/arvba41/non_linear_observers/tree/main/Le203}{\faGithub\xspace}
 
 
 % The non-linear system is 
