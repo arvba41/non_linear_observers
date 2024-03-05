@@ -1,5 +1,10 @@
-clear all; clc;
-% Ensure to add casadi to the path 
+clear all; clc; saveplots = false; add_casadi_path = false;
+% Ensuring casadi is added to the path 
+if add_casadi_path 
+    % add your casadi path here
+    casadi_path = '~/PhDProject/matlab_functions/casadi-3.6.4-linux64-matlab2018b/';
+    addpath(casadi_path);
+end
 import casadi.*
 
 %% Simulating the model
@@ -51,7 +56,9 @@ figsize = [textwidth, textheight];
 set(gcf, 'PaperUnits', 'centimeters', 'PaperSize', figsize);
 set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 
-% print -dpdf ../doc/figures/ex4_c_sim.pdf
+if saveplots
+    print -dpdf ../doc/figures/ex5_MHE_sim.pdf
+end
 %% Estimation using KF
 
 % initial guesses
@@ -91,22 +98,24 @@ figsize = [textwidth, textheight];
 set(gcf, 'PaperUnits', 'centimeters', 'PaperSize', figsize);
 set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 
-% print -dpdf ../doc/figures/ex4_c_EKF.pdf
+if saveplots
+    print -dpdf ../doc/figures/ex5_MHE_KF.pdf
+end
 
 %% Estimation using MHE 
 % initialization
 xhat_MHE = zeros(length(x0),N);
-% xhat_MHE(:,1) = x0;
+% xhat_MHE(:,1) = 0;
 xhat_MHE(:,1) = data.x(:,1);
 
 T = 2; % minimum time for MHE to begin
 
 while T <= N % run untill final time 
     xhat_MHE(:,T) = MHE(model,init,data,T); % estimate stat using MHE 
-    T = T + 1; % incriment time 
+    T = T + 1; % increase time 
 end
 
-%% % plot KF estimate with simulation data 
+%% plot MHE estimate with simulation data 
 figure(12); clf; set(gcf,"WindowStyle",'docked');
 tiledlayout(1,2);
 
@@ -121,8 +130,9 @@ nexttile();
 plot(1:N,data.x(2,:)); box off; hold on
 plot(1:N,xhatKF(2,:)); box off; hold on
 plot(1:N,xhat_MHE(2,:)); box off; hold on
-legend('sim','KF','MHE'); 
-legend('Interpreter','latex','NumColumns',3);
+L = legend('sim','KF','MHE'); 
+L = legend('Interpreter','latex','NumColumns',3);
+L.Layout.Tile = 'north';
 ylabel('$x_2$','Interpreter','latex');
 xlabel('$N$','Interpreter','latex');
 
@@ -139,7 +149,13 @@ figsize = [textwidth, textheight];
 set(gcf, 'PaperUnits', 'centimeters', 'PaperSize', figsize);
 set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 
-% print -dpdf ../doc/figures/ex4_c_EKF.pdf
+if saveplots
+    print -dpdf ../doc/figures/ex5_MHE.pdf
+end
+
+%% MSE
+MSE.KF = sum((data.x - xhatKF).^2, 2);
+MSE.MHE = sum((data.x - xhat_MHE).^2, 2);
 
 %% FUNCTION: KF
 function xhat = KF(model,init,data)
