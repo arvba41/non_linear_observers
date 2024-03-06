@@ -14,10 +14,45 @@ The cumulative squared errors for the two states using the two methods are as fo
     \begin{tabular}{c|c|c}
         Method & $\tilde x_1$ & $\tilde x_2$ \\
         \hline 
-        KF & 482.16 & 54.99 \\
-        MHE & 7.98 & 27.72
+        KF & 514.49 & 58.03 \\
+        MHE & 14.12 & 28.22
     \end{tabular}
 \end{table}
+
+% \clearpage
+% The moving horizon estimate with N = 10 is as follows:
+% \begin{figure}[!h]
+%     \centering
+%     \includegraphics{figures/ex5_MHE_10T.pdf}
+% \end{figure}
+
+% The cumulative squared errors for the two states using the two methods are as follows:
+% \begin{table}[!h]
+%     \centering
+%     \begin{tabular}{c|c|c}
+%         Method & $\tilde x_1$ & $\tilde x_2$ \\
+%         \hline 
+%         EKF & 514.49 & 58.03 \\
+%         MHE & 19.02 & 28.81
+%     \end{tabular}
+% \end{table}
+
+% The moving horizon estimate with N = 20 is as follows:
+% \begin{figure}[!h]
+%     \centering
+%     \includegraphics{figures/ex5_MHE_20T.pdf}
+% \end{figure}
+
+% The cumulative squared errors for the two states using the two methods are as follows:
+% \begin{table}[!h]
+%     \centering
+%     \begin{tabular}{c|c|c}
+%         Method & $\tilde x_1$ & $\tilde x_2$ \\
+%         \hline 
+%         EKF & 514.49 & 58.03 \\
+%         MHE & 54.09 & 29.05
+%     \end{tabular}
+% \end{table}
 
 \clearpage
 Comparing the performance of MHE and EKF, a model with non-linear perturbation ( given by (9) in the article) is used as an example and the results are as follows: 

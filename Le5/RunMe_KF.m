@@ -22,7 +22,7 @@ model.Q = model.B * 1 * model.B';
 x0 = [0;0]; 
 data.x = zeros(length(x0),N);
 data.y = zeros(1,N);
-data.x(:,1) = model.A * x0 + sqrt(1) * rand(2,1);
+data.x(:,1) = model.A * x0 + model.B * sqrt(1) * rand;
 data.y(:,1) = model.C * data.x(:,1) + sqrt(model.R) * rand;
 for ii = 2:N
     data.x(:,ii) = model.A * data.x(:,ii-1) + model.B * rand;
@@ -151,6 +151,8 @@ set(gcf, 'PaperUnits', 'normalized', 'PaperPosition', [0, 0, 1, 1]);
 
 if saveplots
     print -dpdf ../doc/figures/ex5_MHE.pdf
+    % print -dpdf ../doc/figures/ex5_MHE_10T.pdf
+    % print -dpdf ../doc/figures/ex5_MHE_20T.pdf
 end
 
 %% MSE
